@@ -1,0 +1,24 @@
+Rubric:
+- Must deliver a fully functional app or else you fail!!
+- If app doesnt run at all you fail!!
+- 5 points off if you dont have a start command
+- 5 points off if you include node_modules in submission
+- 10 points if no client side js
+- 10 points if no css(must have 10-15 rules)
+- 10 points for no protection against XSS
+- 2 points off per field on form that allows either blank or invalid data (cap 5 points per form)
+- 2 points per page that doesnt have valid html MUST HAVE VALID HTML
+- 10 points off per each core feature thats missing
+- 5 points off for username not being case sensitive (no duplicates)
+
+
+you will get 5 points for every extra feature you complete (cap of 15 points)
+
+Implement tota11y 
+
+
+Review System:
+- Only allow user to write 1 review per item!
+- Make sure users have access to update a review if they have a change of heart
+
+
