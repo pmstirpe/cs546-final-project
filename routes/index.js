@@ -1,8 +1,8 @@
-//Here you will import route files and export them as used in previous labs
-import peopleRoutes from './people.js';
+//Here you will import route files and export the constructor method as shown in lecture code and worked in previous labs.
+import authRoutes from './auth_routes.js';
 
 const constructorMethod = (app) => {
-  app.use('/', peopleRoutes);
+  app.use('/', authRoutes);
 
   app.use('*', (req, res) => {
     res.status(404).json({error: 'Route Not found'});

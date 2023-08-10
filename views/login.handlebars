@@ -3,3 +3,30 @@
 login form handlebar template
 
 --}}
+
+<form method="POST" action="/login" id="login-form">
+
+    <label for="emailAddressInput">Enter Username: </label>
+    <input type="text" id="emailAddressInput" name="emailAddressInput" />
+
+    <label for="passwordInput ">Enter Password: </label>
+    <input type="password" id="passwordInput" name="passwordInput" />
+
+    <button type="submit">Login</button>
+
+
+    {{!-- <div id="loginError" class="error" hidden>Error: Please enter a valid username and password</div> --}}
+
+</form>
+
+<div id="loginErrors" class="error" hidden></div>
+
+
+{{#if loginError}}
+<div>{{error}}</div>
+{{/if}}
+
+
+<a href="/register">Click here to register!</a>
+
+<script src="../public/js/main.js"></script>
