@@ -8,17 +8,13 @@ const createCharity = async (
     charityName,
     category,
     creationDate,
-    details,
-    reviews,
-    comments
+    details
   ) => {
 
 //input validation
 charityName = helper.checkString(charityName, 'charity name');
 category = helper.checkString(category, 'category');
 details = helper.checkString(details, 'details');
-reviews = validation.checkStringArray(reviews, 'reviews');
-comments = helper.checkStringArray(comments, 'comments');
 creationDate = validation.checkDate(creationDate);
 
 let newCharity = {
@@ -26,8 +22,8 @@ let newCharity = {
     category: category,
     creationDate: creationDate,
     details: details,
-    reviews: reviews,
-    comments: comments
+    reviews: [],
+    comments: []
   }
 
 const charityCollection = await charities();
