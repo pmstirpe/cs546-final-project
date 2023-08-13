@@ -46,6 +46,15 @@ const exportedMethods = {
         throw 'invalid date provided';
       
     return date;
-};
+},
+
+ checkRating(rating) {
+  if (!rating) throw `Error: You must supply a rating`;
+
+  if (typeof rating !== 'number' || rating < 1 || rating > 5)
+        throw 'invalid rating provided';
+
+  return rating;
+  };
 
 export default exportedMethods;
