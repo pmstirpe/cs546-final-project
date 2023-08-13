@@ -53,7 +53,7 @@ const getAll = async () => {
 };
 
 const get = async (id) => {
-    validation.checkId(id, 'Charity Id')
+    id = validation.checkId(id, 'Charity Id')
     const charityCollection = await charities();
     const charity = await charityCollection.findOne({_id: new ObjectId(id)});
     if (charity === null) throw 'No charity with that id';
