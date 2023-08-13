@@ -1,0 +1,16 @@
+<h1>{{charity.charityName}}</h1>
+<div class="error hidden" id="error-container">
+    <div class="alert alert-danger text-goes-here"></div>
+</div>
+<section>
+    {{#if charity.reviews.length}}
+    <h2>Reviews</h2>
+    <ul>
+      {{#each charity.reviews}}
+        <li>{{this.rating}}: {{this.reviewText}}</li>
+      {{/each}}
+    </ul>
+    {{/if}}
+</section>
+<a href="/charities">Back to all charities</a>
+<script src="/public/js/main.js"></script>
