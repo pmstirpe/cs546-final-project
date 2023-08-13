@@ -1,4 +1,4 @@
-import {charities, reviews, users, donations} from '../config/mongoCollections.js';
+import {donations} from '../config/mongoCollections.js';
 import {ObjectId} from 'mongodb';
 import * as helper from "../helpers.js";
 import * as validation from "../validation.js";
@@ -63,4 +63,4 @@ const removeComment = async (commentId) => {
     return donations.get(donation._id);
 };
 
-export default {createReview, getAllReviews, get, removeReview};
+export default {createComment, getAllComments, get, removeComment};
