@@ -30,7 +30,7 @@ const insertInfo = await charityCollection.insertOne(newCharity);
 if (!insertInfo.acknowledged || !insertInfo.insertedId) {
     throw 'Could not add charity';
 } else {
-    return {insertedUser: true};
+    return newCharity;
 }
 
 };
@@ -40,10 +40,10 @@ const getAll = async () => {
     const charityCollection = await charities();
     let charityList = await charityCollection.find({}).toArray();
     if (!charityList) throw 'Could not get all charities';
-    charityList = charityList.map((element) => {
+    /*charityList = charityList.map((element) => {
       element._id = element._id.toString();
       return element;
-    });
+    });*/
     return charityList;
 };
 
