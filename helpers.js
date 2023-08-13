@@ -93,3 +93,10 @@ export function checkString(strVal, varName) {
     throw `Error: ${strVal} is not a valid value for ${varName} as it only contains digits`;
   return strVal;
 }
+
+export function checkAmount(val) {
+  if (typeof val !== 'number' || val <= 0 || val.toString().split(".")[1].length > 2)
+  throw 'invalid amount provided';
+
+  return val;
+}
