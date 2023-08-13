@@ -1,8 +1,7 @@
 import {charities} from '../config/mongoCollections.js';
 import {ObjectId} from 'mongodb';
 import * as helper from "../helpers.js";
-import * as validation from "../validation.js";
-import moment from 'moment';
+import validation from "../validation.js";
 
 const createCharity = async (
     charityName,
