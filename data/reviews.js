@@ -21,7 +21,7 @@ let newReview = {_id: new ObjectId(), charityId: charityId, userId: userId, revi
 
 const charityCollection = await charities();
 
-await prodCollection.updateOne({_id: new ObjectId(charityId)}, {$push: {reviews: newReview}});
+await charityCollection.updateOne({_id: new ObjectId(charityId)}, {$push: {reviews: newReview}});
 
 
 return newReview;
@@ -31,20 +31,25 @@ const getAllReviews = async (charityId) => {
 
     charityId = validation.checkId(charityId, 'Charity Id');
     const charityCollection = await charities();
-    const charity = await charities.get(charityId);
+    const charity = await charityCollection.get(charityId);
     if (!charity) throw 'Could not get charity';
     
     return charity.reviews;
 };
 
 const get = async (id) => {
-    id = validation.checkId(id, 'Charity Id')
+    id = validation.checkId(id, 'Review Id')
     const charityCollection = await charities();
-    const charity = await charityCollection.findOne({_id: new ObjectId(id)});
-    if (charity === null) throw 'No charity with that id';
-    charity._id = charity._id.toString();
-    return charity;
-  };
+   
+    const charity = await charityCollection.find({'reviews._id': new ObjectId(id)}).toArray();
+
+    if (!charity) throw 'No review with that id';
+
+    for (let r of charity[0].reviews) {
+        if (r._id.toString() === id)
+            return r;
+    }
+};
 
 const removeReview = async (reviewId) => {
     reviewId = validation.checkId(reviewId, 'review Id')
@@ -54,13 +59,13 @@ const removeReview = async (reviewId) => {
     const charityCollection = await charities();
     
     charity = await charityCollection
-        .find({ 'reviews._id': reviewId });
+        .find({'reviews._id': reviewId});
     
-    await prodCollection.updateOne(
+    await charityCollection.updateOne(
         { _id: charity._id },
         { $pull: {reviews: { _id: reviewId } } });
     
-    return charities.get(charity._id);
+    return charityCollection.get(charity._id);
 };
 
 export default {createReview, getAllReviews, get, removeReview};
