@@ -1,4 +1,5 @@
 import {ObjectId} from 'mongodb';
+import moment from 'moment';
 
 const exportedMethods = {
   checkId(id, varName) {
@@ -37,7 +38,14 @@ const exportedMethods = {
     return arr;
   }
 
+  checkDate(date) {
+    if (!date) throw `Error: You must supply a date`;
+    date = date.trim();
 
+    if (!moment(date.trim(), 'MM/DD/YYYY', true).isValid())
+        throw 'invalid date provided';
+      
+    return date;
 };
 
 export default exportedMethods;
