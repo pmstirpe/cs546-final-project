@@ -21,3 +21,5 @@ NOTE: YOU WILL NEED TO CHANGE THE CODE BELOW AND UNCOMMENT IT TO HAVE THE COLLEC
 export const users = getCollectionFn('users');
 export const gifts = getCollectionFn('gifts');
 export const charities = getCollectionFn('charities');
+export const reviews = getCollectionFn('reviews');
+export const comments = getCollectionFn('comments');
