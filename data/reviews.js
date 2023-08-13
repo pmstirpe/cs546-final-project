@@ -1,7 +1,7 @@
-import {charities, reviews, users} from '../config/mongoCollections.js';
+import {charities} from '../config/mongoCollections.js';
 import {ObjectId} from 'mongodb';
 import * as helper from "../helpers.js";
-import * as validation from "../validation.js";
+import validation from "../validation.js";
 
 const createReview = async (
     charityId,
@@ -11,18 +11,16 @@ const createReview = async (
 ) => {
 
 //input validation
-reviewText = helper.checkString(reviewName, 'review name');
+reviewText = helper.checkString(reviewText, 'review');
 rating = validation.checkRating(rating);
 userId = validation.checkId(userId, 'User Id'); //this might need to be check string depending on how the id is supplied
-charityId = validation.checkId(userId, 'Charity Id'); //this might need to be check string depending on how the id is supplied
+charityId = validation.checkId(charityId, 'Charity Id'); //this might need to be check string depending on how the id is supplied
 
 
 let newReview = {_id: new ObjectId(), charityId: charityId, userId: userId, reviewText: reviewText, rating: rating};
 
 const charityCollection = await charities();
-
 await charityCollection.updateOne({_id: new ObjectId(charityId)}, {$push: {reviews: newReview}});
-
 
 return newReview;
 }
