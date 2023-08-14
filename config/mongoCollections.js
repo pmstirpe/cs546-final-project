@@ -23,3 +23,4 @@ export const gifts = getCollectionFn('gifts');
 export const charities = getCollectionFn('charities');
 export const reviews = getCollectionFn('reviews');
 export const comments = getCollectionFn('comments');
+export const donations = getCollectionFn('donations');

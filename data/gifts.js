@@ -56,3 +56,5 @@ const getAll = async () => {
   const getGiftbyName = async (giftName) => {
    
   };
+
+  export default {createGift, getAll, get};

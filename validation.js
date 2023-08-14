@@ -36,7 +36,7 @@ const exportedMethods = {
     }
 
     return arr;
-  }
+  },
 
   checkDate(date) {
     if (!date) throw `Error: You must supply a date`;
@@ -46,7 +46,7 @@ const exportedMethods = {
         throw 'invalid date provided';
       
     return date;
-},
+  },
 
  checkRating(rating) {
   if (!rating) throw `Error: You must supply a rating`;
@@ -55,6 +55,8 @@ const exportedMethods = {
         throw 'invalid rating provided';
 
   return rating;
-  };
+  }
+  
+};
 
 export default exportedMethods;
