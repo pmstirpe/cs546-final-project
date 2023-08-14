@@ -1,6 +1,9 @@
 import { dbConnection, closeConnection } from './config/mongoConnection.js';
 import { charityData } from './data/index.js';
 import { reviewData } from './data/index.js';
+import { commentData } from './data/index.js';
+import { giftData } from './data/index.js';
+import { userData } from './data/index.js';
 
 
 const db = await dbConnection();
@@ -13,6 +16,9 @@ let charity2 = await charityData.createCharity('Salvation Army', 'Religion', '02
 await reviewData.createReview(charity1._id.toString(), '64d92657c4fd978e90fd1ea4', 'this is a great charity!', 5);
 await reviewData.createReview(charity1._id.toString(), '64d94657c4fd978e90fd1ea7', 'this is a bad charity!', 1);
 await reviewData.createReview(charity2._id.toString(), '64d93657c4fd978e90fd1ea8', 'this is an ok charity', 3);
+
+
+
 
 
 await closeConnection();
