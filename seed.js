@@ -1,10 +1,13 @@
-import { dbConnection, closeConnection } from './config/mongoConnection.js';
+import { dbConnection, closeConnection, dropCollection } from './config/mongoConnection.js';
 import { charityData } from './data/index.js';
 import { reviewData } from './data/index.js';
 
 
-const db = await dbConnection();
-await db.dropDatabase();
+export const createCharities = async () => {
+
+// await db.dropDatabase();
+await dropCollection("charities");
+
 
 let charity1 = await charityData.createCharity('Make a Wish', 'Children', '04/05/1998', 'Together, we create life-changing wishes for children with critical illnesses – but you can make a childs wish possible.');
 
@@ -15,4 +18,4 @@ await reviewData.createReview(charity1._id.toString(), '64d94657c4fd978e90fd1ea7
 await reviewData.createReview(charity2._id.toString(), '64d93657c4fd978e90fd1ea8', 'this is an ok charity', 3);
 
 
-await closeConnection();
+};

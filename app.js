@@ -5,6 +5,7 @@ import configRoutes from './routes/index.js';
 import exphbs from 'express-handlebars';
 import {fileURLToPath} from 'url';
 import {dirname} from 'path';
+import * as seed from './seed.js'
 
 app.use(
   session({
@@ -202,6 +203,9 @@ app.engine('handlebars', handlebarsInstance.engine);
 app.set('view engine', 'handlebars');
 
 configRoutes(app);
+
+// Seed function for creating charities
+seed.createCharities();
 
 app.listen(3000, () => {
   console.log("We've now got a server!");
