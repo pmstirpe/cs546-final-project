@@ -16,4 +16,18 @@ const closeConnection = async () => {
   await _connection.close();
 };
 
-export {dbConnection, closeConnection};
+const dropCollection = async (collectionName) => {
+  
+  if (!_connection) {
+    _connection = await MongoClient.connect(mongoConfig.serverUrl);
+    _db = _connection.db(mongoConfig.database);
+  }
+
+  _db.collection(collectionName).drop(function(err, delOK) {
+    if (err) throw err;
+    if (delOK) console.log("Collection " + collectionName + " deleted");
+  });
+  return _db;
+};
+
+export {dbConnection, closeConnection, dropCollection};
