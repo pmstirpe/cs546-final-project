@@ -2,6 +2,7 @@
 
 let loginForm = document.getElementById('login-form');
 let registrationForm = document.getElementById('registration-form');
+let donateButon = document.getElementById('donate-button');
 
 if (loginForm) {
   loginForm.addEventListener('submit', (event) => {
@@ -94,4 +95,14 @@ if(registrationForm){
 
   });
 
+}
+
+if (donateButon) {
+  donateButon.addEventListener('submit', (event) => {
+    console.log('donate-button fired');
+    event.preventDefault();
+    let charityName = document.getElementById('charityName').innerHTML;
+    donateButon.action = "/donate/charityName/" + charityName;
+    event.target.submit();
+  });
 }

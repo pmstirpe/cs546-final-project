@@ -1,8 +1,8 @@
 import {donations} from '../config/mongoCollections.js';
+import {charities} from '../config/mongoCollections.js';
 import {ObjectId} from 'mongodb';
 import * as helper from "../helpers.js";
 import validation from "../validation.js";
-import {charityData} from './data/charities.js';
 
 
 const createDonation = async (
@@ -26,8 +26,8 @@ const createDonation = async (
         userName: userName,
         charityName: charityName,
         giftName: giftName,
-        giftNote: [],
-        comments: [],
+        giftNote: giftNote,
+        comments: comments,
         donateDate:donateDate
       } 
 
@@ -79,10 +79,16 @@ const getByUsername = async (userName) => {
     charityName = validation.checkString(charityName, 'charity name')
 
     const donationCollection = await donations();
-    const donation = await donationCollection.findOne({charityName: charityName});
+    const donationList = await donationCollection.find({}).toArray();
+    let returnArr = [];
 
-    if (!donation) throw 'No donation found with that username';
-    return donation;
+    for(let i = 0; i < donationList.length; i++){
+        if(donationList[i].charityName === charityName){
+            returnArr.push(donationList[i]);
+        }
+    }
+
+    return returnArr;
   };
 
   
@@ -261,5 +267,4 @@ const divideDonation = async (donationId) => {
 
 };
 
-
-
+export default {createDonation, getById, getByUsername, getByCharityname, getByGiftname, getAllDonations, getByDonatedate, calculateAmountByDonationId, calculateAmountByUsername, addCommentByCharityname, addComment, divideDonation};

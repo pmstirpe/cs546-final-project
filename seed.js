@@ -1,12 +1,14 @@
 import { dbConnection, closeConnection, dropCollection } from './config/mongoConnection.js';
 import { charityData } from './data/index.js';
 import { reviewData } from './data/index.js';
+import { donationData } from './data/index.js';
 
 
 export const createCharities = async () => {
 
 // await db.dropDatabase();
 await dropCollection("charities");
+await dropCollection("donations");
 
 
 let charity1 = await charityData.createCharity('Make a Wish', 'Children', '04/05/1998', 'Together, we create life-changing wishes for children with critical illnesses – but you can make a childs wish possible.');
@@ -17,5 +19,6 @@ await reviewData.createReview(charity1._id.toString(), '64d92657c4fd978e90fd1ea4
 await reviewData.createReview(charity1._id.toString(), '64d94657c4fd978e90fd1ea7', 'this is a bad charity!', 1);
 await reviewData.createReview(charity2._id.toString(), '64d93657c4fd978e90fd1ea8', 'this is an ok charity', 3);
 
+await donationData.createDonation('Peter', 'Make a Wish', 'Mountain Bike', 'I hope you like the new bike!', 'Bikes are awesome', '02/11/1996');
 
 };

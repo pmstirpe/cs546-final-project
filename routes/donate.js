@@ -48,7 +48,7 @@ router.route('/').get(async (req, res) => {
 
 
 router
-  .route('/:donationId')
+  .route('/donationId/:donationId')
   .get(async (req, res) => {
     try {
         req.params.donationId = validation.checkId(req.params.donationId, 'Id URL Param');
@@ -60,7 +60,7 @@ router
 });
 
 
-router.route('/:userName')
+router.route('/userName/:userName')
 .get(async (req, res) => {
     try {
         const username = req.params.username;
@@ -82,20 +82,23 @@ router.route('/:userName')
 
 
 
-router.route('/:charityName')
+router.route('/charityName/:charityName')
 .get(async (req, res) => {
     try {
         const charityName = req.params.charityName;
 
         const charityName1 = helper.checkString(charityName, 'charityName'); 
 
-        const charityDonations = await donationData.getByCharityName(charityName1);
+        const charityDonations = await donationData.getByCharityname(charityName1);
         
         if (charityDonations && charityDonations.length > 0) {
-            return res.render('charityDonations', { donations: charityDonations });
-        } else {
-            throw 'No donations found for this username';
-        }
+            return res.render('donate', { donations: charityDonations });
+        } 
+        //else {
+        //     throw 'No donations found for this charityName';
+        // }
+
+        return res.render('donate', { donations: charityDonations });
 
     } catch (e) {
         res.status(404).json({ error: e });

@@ -1,4 +1,4 @@
-<h1>{{charity.charityName}}</h1>
+<h1 id="charityName">{{charity.charityName}}</h1>
 <div class="error hidden" id="error-container">
     <div class="alert alert-danger text-goes-here"></div>
 </div>
@@ -12,5 +12,24 @@
     </ul>
     {{/if}}
 </section>
-<a href="/charities">Back to all charities</a>
+
+<section>
+    {{#if donations.length}}
+    <h2>Past Donations</h2>
+    <ul>
+      {{#each donations}}
+        <li>{{this.userName}}: {{this.giftName}}</li>
+      {{/each}}
+    </ul>
+    {{/if}}
+</section>
+
+
+<form id="donate-button">
+    <input type="submit" value="Donate"/>
+</form>
+
+<br>
+
+<footer><button onclick="history.back()">Go Back</button></footer>
 <script src="/public/js/main.js"></script>

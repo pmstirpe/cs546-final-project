@@ -1,6 +1,7 @@
 //import express, express router as shown in lecture code
 import {Router} from 'express';
 import {charityData} from '../data/index.js';
+import { donationData } from '../data/index.js';
 import {ObjectId} from 'mongodb';
 import * as helper from '../helpers.js';
 import validation from "../validation.js";
@@ -51,7 +52,13 @@ router
     }
     try {
       const charity = await charityData.get(req.params.charityId);
-      return res.render('individualCharity', {charity: charity});
+
+      if(charity !== undefined){
+        const donations = await donationData.getByCharityname(charity.charityName);
+        return res.render('individualCharity', {charity: charity, donations: donations});
+      } else {
+        return res.render('individualCharity', {charity: charity}); 
+      }
     } catch (e) {
       res.status(404).json({error: e});
     }
