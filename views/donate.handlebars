@@ -1,0 +1,32 @@
+<h1>Donate Page</h1>
+<div class="error hidden" id="error-container">
+    <div class="alert alert-danger text-goes-here"></div>
+</div>
+{{#each Donations}}  
+    <article class="Donation">
+      <h2><a href="/donations/{{_id}}">{{charityName}}</a></h2>
+      <p>{{details}}</p>
+{{/each}}
+<script src="/public/js/main.js"></script>
+
+<form action="/donate" method="POST">
+    <!-- Gift Type -->
+    <label for="giftType">Gift Type:</label>
+    <select name="giftType" id="giftType">
+        <option value="one-time">One-time</option>
+        <option value="monthly">Monthly</option>
+    </select>
+
+    <!-- Gift Amount -->
+    <label for="amount">Amount:</label>
+    <input type="number" name="amount" id="amount" required>
+
+    <!-- Billing Information -->
+    <label for="billingName">Name:</label>
+    <input type="text" name="billingName" id="billingName" required>
+
+    <label for="billingAddress">Address:</label>
+    <input type="text" name="billingAddress" id="billingAddress" required>
+
+    <button type="submit">Proceed to Payment</button>
+</form>
