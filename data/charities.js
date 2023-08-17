@@ -8,6 +8,9 @@ const createCharity = async (
     category,
     creationDate,
     isCharity,
+    location,
+    age,
+    picture,
     details
   ) => {
 
@@ -17,12 +20,22 @@ category = helper.checkString(category, 'category');
 details = helper.checkString(details, 'details');
 creationDate = validation.checkDate(creationDate);
 isCharity = validation.checkBool(isCharity);
+location = helper.checkString(location, 'location');
+age = helper.checkAge(age);
+picture = helper.checkString(picture, 'picture link');
+
+if (location.toLowerCase() !== 'america' && location.toLowerCase() !== 'africa' && location.toLowerCase() !== 'europe') {
+  throw `location must be europe, africa, or america`;
+}
 
 let newCharity = {
     charityName: charityName,
     category: category,
     creationDate: creationDate,
     isCharity: isCharity,
+    location: location.toLowerCase(),
+    age: age,
+    picture: picture,
     details: details,
     reviews: [],
     comments: []
@@ -70,7 +83,7 @@ const get = async (id) => {
 
 const getCharityByName = async (charityName) => {
     
-    charityName = helpers.checkString(charityName, 'charity');
+    charityName = helper.checkString(charityName, 'charity');
 
     const charities = await getAll();
     let returnCharity = undefined;
@@ -81,6 +94,41 @@ const getCharityByName = async (charityName) => {
     }
     return returnCharity;
 };
+
+const getSponsorByAge = async (age) => {
+    
+  age = helper.checkAge(age);
+
+  const charityCollection = await charities();
+  const sponsorList = await charityCollection.find({'age': age}).toArray();
+  if (!sponsorList) throw 'Could not get all sponsors';
+
+  let sponsorMatches = [];
+  for(let i = 0; i < sponsorList.length; i++){
+    if(!sponsorList[i].isCharity){
+      sponsorMatches.push(sponsorList[i]);
+    }
+  }
+  return sponsorMatches;
+};
+
+const getSponsorByLocation = async (location) => {
+    
+  location = helper.checkString(location);
+
+  const charityCollection = await charities();
+  const sponsorList = await charityCollection.find({'location': location.toLowerCase()}).toArray();
+  if (!sponsorList) throw 'Could not get all sponsors';
+
+  let sponsorMatches = [];
+  for(let i = 0; i < sponsorList.length; i++){
+    if(!sponsorList[i].isCharity){
+      sponsorMatches.push(sponsorList[i]);
+    }
+  }
+  return sponsorMatches;
+};
+
 
 const remove = async (id) => {
 
@@ -97,4 +145,4 @@ const remove = async (id) => {
     return `${deletionInfo.value.charityName} has been successfully deleted!`;
 };
 
-export default {createCharity, getAll, getAllSponsors, get, getCharityByName, remove};
+export default {createCharity, getAll, getAllSponsors, getSponsorByAge, getSponsorByLocation, get, getCharityByName, remove};
