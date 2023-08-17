@@ -2,8 +2,14 @@
 import {Router} from 'express';
 import {userData} from '../data/index.js';
 import * as helper from '../helpers.js';
+import {fileURLToPath} from 'url';
+import path from 'path';
+import { dirname } from "path";
+
 
 const router = Router();
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 router.route('/').get(async (req, res) => {
   
