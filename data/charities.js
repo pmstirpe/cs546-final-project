@@ -6,7 +6,7 @@ import validation from "../validation.js";
 const createCharity = async (
     charityName,
     category,
-    creationDate,
+    isIndividualSponsor,
     details
   ) => {
 
@@ -14,12 +14,14 @@ const createCharity = async (
 charityName = helper.checkString(charityName, 'charity name');
 category = helper.checkString(category, 'category');
 details = helper.checkString(details, 'details');
+isIndividualSponsor = validation.checkBool(isIndividualSponsor);
 creationDate = validation.checkDate(creationDate);
 
 let newCharity = {
     charityName: charityName,
     category: category,
     creationDate: creationDate,
+    isIndividualSponsor: isIndividualSponsor,
     details: details,
     reviews: [],
     comments: []
