@@ -29,6 +29,16 @@ router.route('/').get(async (req, res) => {
         charityData.category = helper.checkString(charityData.category, 'category');
         charityData.details = helper.checkString(charityData.details, 'details');
         charityData.creationDate = validation.checkDate(charityData.creationDate);
+        charityData.isCharity = validation.checkBool(charityData.isCharity);
+        charityData.location = helper.checkString(charityData.location, 'location');
+        charityData.age = helper.checkAge(charityData.age);
+        charityData.picture = helper.checkString(charityData.picture, 'picture link');
+
+
+        if (charityData.location.toLowerCase() !== 'america' && charityData.location.toLowerCase() !== 'africa' && charityData.location.toLowerCase() !== 'europe') {
+          throw `location must be europe, africa, or america`;
+        }
+
     }
     catch (e) {
         return res.status(400).json({error: e});
@@ -46,12 +56,35 @@ router
   .route('/:charityId')
   .get(async (req, res) => {
     try {
-      if (req.params.charityId !== 'sponsors')
+
+      //check if there was a search on sponsor page by age
+      if (req.query.ageInput) {
+        let age = parseInt(req.query.ageInput);
+        age = helper.checkAge(age);
+      }
+
+      if (req.query.locationInput) {
+        helper.checkString(req.query.locationInput);
+      }
+
+      if (req.params.charityId !== 'sponsors' && !req.query.ageInput && !req.query.locationInput)
         req.params.charityId = validation.checkId(req.params.charityId, 'Id URL Param');
     } catch (e) {
       return res.status(400).json({error: e});
     }
     try {
+
+      //get sponsors matching age search parameter
+      if (req.query.ageInput) {
+        const sponsorList = await charityData.getSponsorByAge(parseInt(req.query.ageInput));
+        return res.render('individualSponsor', {sponsors: sponsorList})  
+      }
+
+      //get sponsors matching location search parameter
+      if (req.query.locationInput) {
+        const sponsorList = await charityData.getSponsorByLocation(req.query.locationInput);
+        return res.render('individualSponsor', {sponsors: sponsorList})  
+      }
 
       if (req.params.charityId === 'sponsors') {
         const sponsorList = await charityData.getAllSponsors();
