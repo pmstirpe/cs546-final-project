@@ -167,5 +167,10 @@ router.route('/logout').get(async (req, res) => {
   res.render('logout');
 });
 
+// Display the aboutus page
+router.route("/aboutus").get(async (req, res) => {
+  return res.render("aboutus");
+});
+
 //export router
 export default router;
