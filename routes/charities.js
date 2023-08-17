@@ -46,11 +46,18 @@ router
   .route('/:charityId')
   .get(async (req, res) => {
     try {
-      req.params.charityId = validation.checkId(req.params.charityId, 'Id URL Param');
+      if (req.params.charityId !== 'sponsors')
+        req.params.charityId = validation.checkId(req.params.charityId, 'Id URL Param');
     } catch (e) {
       return res.status(400).json({error: e});
     }
     try {
+
+      if (req.params.charityId === 'sponsors') {
+        const sponsorList = await charityData.getAllSponsors();
+        return res.render('individualSponsor', {sponsors: sponsorList})  
+      }
+
       const charity = await charityData.get(req.params.charityId);
 
       if(charity !== undefined){
