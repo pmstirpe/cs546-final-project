@@ -3,6 +3,8 @@
 let loginForm = document.getElementById('login-form');
 let registrationForm = document.getElementById('registration-form');
 let donateButon = document.getElementById('donate-button');
+let ageForm = document.getElementById('age-search-form');
+let locationForm = document.getElementById('location-search-form');
 
 if (loginForm) {
   loginForm.addEventListener('submit', (event) => {
@@ -103,6 +105,65 @@ if (donateButon) {
     event.preventDefault();
     let charityName = document.getElementById('charityName').innerHTML;
     donateButon.action = "/donate/charityName/" + charityName;
+    event.target.submit();
+  });
+}
+
+if (ageForm) {
+  ageForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+
+    let errorDiv = document.getElementById('ageErrors');
+    let age = document.getElementById('ageInput');
+
+    if (age.value <= 0) {
+      errorDiv.innerHTML = 'invalid age provided';
+      errorDiv.hidden = false;
+      return false;
+    }
+
+    if (typeof parseInt(age.value) !== 'number') {
+      errorDiv.innerHTML = 'must provide an age';
+      errorDiv.hidden = false;
+      return false;
+    }
+
+    event.target.submit();
+  });
+}
+
+if (locationForm) {
+  locationForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+
+    let errorDiv = document.getElementById('locationErrors');
+    let location = document.getElementById('locationInput');
+
+  
+    if (!location.value) {
+      errorDiv.innerHTML = 'must provide a location';
+      errorDiv.hidden = false;
+      return false;
+    }
+    
+    if (typeof location.value !== 'string') {
+      errorDiv.innerHTML = 'Error: location must be a string!';
+      errorDiv.hidden = false;
+      return false;
+    }
+
+    location = location.value.trim();
+    if (location.length === 0) {
+      errorDiv.innerHTML = 'Error: location cannot be an empty string or string with just spaces';
+      errorDiv.hidden = false;
+      return false;
+    }
+    if (!isNaN(location.value)) {
+      errorDiv.innerHTML = `Error: ${location} is not a valid value for location as it only contains digits`;
+      errorDiv.hidden = false;
+      return false;
+    }
+
     event.target.submit();
   });
 }
