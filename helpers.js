@@ -100,3 +100,10 @@ export function checkAmount(val) {
 
   return val;
 }
+
+export function checkAge(val) {
+  if (typeof val !== 'number' || val <= 0)
+  throw 'invalid age provided';
+
+  return val;
+}
