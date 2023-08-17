@@ -7,7 +7,7 @@ const createCharity = async (
     charityName,
     category,
     creationDate,
-    isIndividualSponsor,
+    isCharity,
     details
   ) => {
 
@@ -15,14 +15,14 @@ const createCharity = async (
 charityName = helper.checkString(charityName, 'charity name');
 category = helper.checkString(category, 'category');
 details = helper.checkString(details, 'details');
-isIndividualSponsor = validation.checkBool(isIndividualSponsor);
 creationDate = validation.checkDate(creationDate);
+isCharity = validation.checkBool(isCharity);
 
 let newCharity = {
     charityName: charityName,
     category: category,
     creationDate: creationDate,
-    isIndividualSponsor: isIndividualSponsor,
+    isCharity: isCharity,
     details: details,
     reviews: [],
     comments: []
@@ -48,6 +48,15 @@ const getAll = async () => {
       return element;
     });*/
     return charityList;
+};
+
+const getAllSponsors = async () => {
+
+  const charityCollection = await charities();
+  const sponsorList = await charityCollection.find({'isCharity': false}).toArray();
+  if (!sponsorList) throw 'Could not get all sponsors';
+  
+  return sponsorList;
 };
 
 const get = async (id) => {
@@ -88,4 +97,4 @@ const remove = async (id) => {
     return `${deletionInfo.value.charityName} has been successfully deleted!`;
 };
 
-export default {createCharity, getAll, get, getCharityByName, remove};
+export default {createCharity, getAll, getAllSponsors, get, getCharityByName, remove};
