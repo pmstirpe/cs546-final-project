@@ -6,9 +6,9 @@ import * as helper from '../helpers.js';
 const router = Router();
 
 router.route('/').get(async (req, res) => {
-  //code here for GET THIS ROUTE SHOULD NEVER FIRE BECAUSE OF MIDDLEWARE #1 IN SPECS.
+  
 
-  return res.json({error: 'YOU SHOULD NOT BE HERE!'});
+  return res.sendFile(path.join(__dirname, "../static", "homepage.html"));
 });
 
 router
