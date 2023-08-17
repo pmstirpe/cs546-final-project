@@ -55,8 +55,16 @@ const exportedMethods = {
         throw 'invalid rating provided';
 
   return rating;
-  }
-  
+  },
+
+ checkBool(boole) {
+  if (typeof(boole) === 'undefined' || boole === null) throw `Error: You must provide the ${boole} field`;
+
+  if (typeof(boole) !== 'boolean')
+    throw `${boole} is not a boolean`;
+
+  return boole;
+ } 
 };
 
 export default exportedMethods;
