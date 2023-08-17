@@ -6,6 +6,7 @@ import validation from "../validation.js";
 const createCharity = async (
     charityName,
     category,
+    creationDate,
     isIndividualSponsor,
     details
   ) => {
