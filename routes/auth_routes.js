@@ -1,6 +1,7 @@
 //import express, express router as shown in lecture code
 import {Router} from 'express';
-import {userData} from '../data/index.js';
+import {charityData, userData} from '../data/index.js';
+import { donationData } from '../data/index.js';
 import * as helper from '../helpers.js';
 import {fileURLToPath} from 'url';
 import path from 'path';
@@ -40,6 +41,7 @@ router
     // Add input checking for all fields
     let firstName = data.firstNameInput;
     let lastName = data.lastNameInput;
+    let userName = data.userNameInput;
     let emailAddress = data.emailAddressInput;
     let password = data.passwordInput;
     let confirmPassword = data.confirmPasswordInput;
@@ -50,7 +52,7 @@ router
     }
 
     try {
-      helper.validateNewUser(firstName, lastName, emailAddress, password, role);
+      helper.validateNewUser(firstName, lastName, userName, emailAddress, password, role);
       const allUsers = await userData.getAll();
       for (let i = 0; i < allUsers.length; i++) {
         if (
@@ -67,6 +69,7 @@ router
       let newUser = await userData.createUser(
         firstName,
         lastName,
+        userName,
         emailAddress,
         password,
         role
@@ -103,13 +106,14 @@ router
     I will just do that here */
     // get password
     try {
-      let username = req.body.emailAddressInput;
+      let emailAddress = req.body.emailAddressInput;
       let password = req.body.passwordInput;
 
-      let userCheck = await userData.checkUser(username, password);
+      let userCheck = await userData.checkUser(emailAddress, password);
       req.session.user = {
         firstName: userCheck.firstName,
         lastName: userCheck.lastName,
+        userName: userCheck.userName,
         emailAddress: userCheck.emailAddress,
         role: userCheck.role,
         userId: userCheck._id
@@ -152,6 +156,44 @@ router.route('/admin').get(async (req, res) => {
     res.render('admin', {
       userName: user.firstName,
       currentTime: helper.getCurrentDateTime()
+    });
+  } catch (e) {
+    res.status(400).json(e);
+  }
+});
+
+router.route('/profile').get(async (req, res) => {
+  //code here for GET
+  try {
+    let user = req.session.user.userName;
+
+    //get all review per user
+    //Get all donations per user
+    let charities = await charityData.getAll();
+    let donations = await donationData.getByUsername(user);
+    let reviews = [];
+    let charityNamesForReviews = [];
+
+    for(let i = 0; i < charities.length; i++){
+        let reviewTemp = charities[i].reviews;
+        let charityname = charities[i].charityName;
+        for(let j = 0; j < reviewTemp.length; j++){
+          if(reviewTemp[j].userId === user){
+            reviewTemp[j].charityName = charityname;
+            reviews.push(reviewTemp[j]);
+          }
+        }
+    }
+
+
+    res.render('userProfile', {
+      firstName: req.session.user.firstName,
+      lastName: req.session.user.lastName,
+      emailAddress: req.session.user.emailAddress,
+      userName: user,
+      currentTime: helper.getCurrentDateTime(),
+      donations: donations,
+      reviews: reviews
     });
   } catch (e) {
     res.status(400).json(e);

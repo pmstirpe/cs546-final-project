@@ -64,10 +64,20 @@ const getByUsername = async (userName) => {
     userName = validation.checkString(userName, 'Donator username')
 
     const donationCollection = await donations();
-    const donation = await donationCollection.findOne({userName: userName});
+    // const donation = await donationCollection.findOne({userName: userName});
+    const donationList = await donationCollection.find({}).toArray();
 
-    if (!donation) throw 'No donation found with that username';
-    return donation;
+    let returnArr = [];
+
+    for(let i = 0; i < donationList.length; i++){
+        if(donationList[i].userName === userName){
+            returnArr.push(donationList[i]);
+        }
+    }
+
+
+    // if (!donation) throw 'No donation found with that username';
+    return returnArr;
   };
 
 

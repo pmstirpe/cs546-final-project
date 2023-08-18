@@ -40,6 +40,7 @@ if(registrationForm){
     let emailAddress = document.getElementById('emailAddressInput');
     let firstName = document.getElementById('firstNameInput');
     let lastName = document.getElementById('lastNameInput');
+    let userName = document.getElementById('userNameInput');
     let password = document.getElementById('passwordInput');
     let comfirmPassword = document.getElementById('confirmPasswordInput');
     let role = document.getElementById('roleInput');
@@ -47,7 +48,7 @@ if(registrationForm){
 
     if (emailAddress.value.trim() === '') {
       errorDiv.hidden = false;
-      errorDiv.innerHTML = 'You must enter a value for username';
+      errorDiv.innerHTML = 'You must enter a value for emailAddress';
       return false;
     }
 
@@ -60,6 +61,12 @@ if(registrationForm){
     if (lastName.value.trim() === '') {
       errorDiv.hidden = false;
       errorDiv.innerHTML = 'Error: You must enter a value for lastName';
+      return false;
+    }
+
+    if (userName.value.trim() === '') {
+      errorDiv.hidden = false;
+      errorDiv.innerHTML = 'You must enter a value for username';
       return false;
     }
 

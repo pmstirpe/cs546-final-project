@@ -22,6 +22,9 @@ const createUser = async (
     if(allUsers[i].emailAddress.toLowerCase() === emailAddress.toLowerCase()){
       throw 'Error: there is already a user with this Email Address';
     }
+    if(allUsers[i].userName.toLowerCase() === userName.toLowerCase()){
+      throw 'Error: there is already a user with this userName';
+    }
   }
 
   // Hash the password
@@ -77,7 +80,7 @@ const checkUser = async (emailAddress, password) => {
   } else {
     let match = await bcrypt.compare(password, user.password);
     if (match){
-      return {firstName: user.firstName, lastName: user.lastName, emailAddress: user.emailAddress, role: user.role, _id: user._id};
+      return {firstName: user.firstName, lastName: user.lastName, userName: user.userName, emailAddress: user.emailAddress, role: user.role, _id: user._id};
     } else {
       throw 'Error: Either the email address or password is invalid';
     }
@@ -128,8 +131,24 @@ const getUserByEmailAdress = async (emailAddress) => {
   return returnUser;
 };
 
+const getUserByUserName= async (userName) => {
+  if (!userName) throw 'You must provide an id to search for';
+  if (typeof userName !== 'string') throw 'Id must be a string';
+  if (userName.trim().length === 0)
+    throw 'Id cannot be an empty string or just spaces';
+    userName = userName.trim();
+  const users = await getAll();
+  let returnUser = undefined;
+  for(let i = 0; i < users.length; i++){
+    if(users[i].userName.toLowerCase() === userName.toLowerCase()){
+      returnUser = users[i];
+    }
+  }
+  return returnUser;
+};
 
 
 
 
-export default {createUser, checkUser, getAll, get, getUserByEmailAdress};
+
+export default {createUser, checkUser, getAll, get, getUserByEmailAdress, getUserByUserName};

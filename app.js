@@ -85,6 +85,25 @@ app.use("/admin", async (req, res, next) => {
   }
 });
 
+
+app.use("/profile", async (req, res, next) => {
+  //This middleware will only be used for the GET /profile route
+  if (req.method === "GET") {
+    if (!req.session.user) {
+      //If a user is not logged in, you will redirect to the GET /login route
+      return res.redirect("/login");
+    } else {
+      /* If the user is logged in, the middleware will "fall through" to the next route calling the next() callback.
+      Users with both roles admin or user should be able to access the /protected route, so you simply need to make sure they are authenticated in this middleware.
+    */
+      next();
+    }
+  } else {
+    //If req.method is not GET
+    next();
+  }
+});
+
 //middleware #4
 app.use("/protected", async (req, res, next) => {
   //This middleware will only be used for the GET /protected route
