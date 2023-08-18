@@ -1,7 +1,6 @@
 //import express, express router as shown in lecture code
 import {Router} from 'express';
-import {charityData, userData} from '../data/index.js';
-import { donationData } from '../data/index.js';
+import {charityData, userData, donationData, giftData} from '../data/index.js';
 import * as helper from '../helpers.js';
 import {fileURLToPath} from 'url';
 import path from 'path';
@@ -156,6 +155,20 @@ router.route('/admin').get(async (req, res) => {
     res.render('admin', {
       userName: user.firstName,
       currentTime: helper.getCurrentDateTime()
+    });
+  } catch (e) {
+    res.status(400).json(e);
+  }
+});
+
+
+router.route('/giftCatalog').get(async (req, res) => {
+  //code here for GET
+  try {
+    let gifts = await giftData.getAll();
+    res.render('giftCatalog', {
+      currentTime: helper.getCurrentDateTime(),
+      gifts: gifts
     });
   } catch (e) {
     res.status(400).json(e);

@@ -28,9 +28,9 @@ console.log("-------------------COMPLETE-------------------------------");
   
 let charity1 = await charityData.createCharity('Make a Wish', 'Children', '04/05/1998', true, 'america', 5, 'N/A', 'Together, we create life-changing wishes for children with critical illnesses – but you can make a childs wish possible.');
 let charity2 = await charityData.createCharity('Salvation Army', 'Religion', '02/11/1996', true, 'europe', 7, 'N/A', 'The Salvation Army, an international movement, is an evangelical part of the universal Christian Church. Its message is based on the Bible. Its ministry is motivated by the love of God. Its mission is to preach the gospel of Jesus Christ and to meet human needs in His name without discrimination.');
-let charity3 = await charityData.createCharity('Jane Doe', 'Children', '02/11/2019', false, 'africa', 4, '/public/jane.jpg', 'jane doe individual sponsor');
-let charity4 = await charityData.createCharity('John Doe', 'Children', '02/11/2016', false, 'europe', 7, '/public/john.png', 'john doe individual sponsor');
-let charity5 = await charityData.createCharity('Amy Lee', 'Children', '02/11/2017', false, 'america', 6, '/public/amy.jpeg', 'amy lee individual sponsor');
+let charity3 = await charityData.createCharity('Jane Doe', 'Children', '02/11/2019', true, 'africa', 4, '/public/jane.jpg', 'jane doe individual sponsor');
+let charity4 = await charityData.createCharity('John Doe', 'Children', '02/11/2016', true, 'europe', 7, '/public/john.png', 'john doe individual sponsor');
+let charity5 = await charityData.createCharity('Amy Lee', 'Children', '02/11/2017', true, 'america', 6, '/public/amy.jpeg', 'amy lee individual sponsor');
 let charity6 = await charityData.createCharity('Amy Lee', 'Children', '02/11/2017', false, 'america', 6, '/public/amy.jpeg', 'amy lee individual sponsor');
 let charity7 = await charityData.createCharity('Amy Lee', 'Children', '02/11/2017', false, 'america', 6, '/public/amy.jpeg', 'amy lee individual sponsor');
 console.log("-------------------COMPLETE-------------------------------");
@@ -66,14 +66,14 @@ await reviewData.createReview(charity2._id.toString(), 'hasking', 'this is an ok
 await reviewData.createReview(charity2._id.toString(), 'tpardewe', 'Good charity, could do better', 3);
 
   //I will assume the charity variable name to be charity6,charity7, etc. If anyone create other variable name, please change the variable names below, thanks.
-await reviewData.createReview(charity6._id.toString(), '64db0bf5fc13ae52a4089fe0', 'This charity stands out for its transparency, ensuring donors know exactly where their contributions are going.', 5);
-await reviewData.createReview(charity6._id.toString(), '64d92657c4fd978e90fd1ea4', 'Their dedication to on-ground work has made a tangible difference in communities, showcasing true commitment.', 5);
-await reviewData.createReview(charity7._id.toString(), '64db0c81fc13ae524108a093', 'The organizations volunteer programs are well-structured, allowing individuals from all walks of life to contribute meaningfully.', 4); 
-await reviewData.createReview(charity7._id.toString(), '64db0c81fc13ae524108a09c', 'With a focus on sustainability, this charitys projects are not just a quick fix but offer long-term solutions to pressing issues.', 4); 
-await reviewData.createReview(charity1._id.toString(), '64db0c81fc13ae524108a0a2', 'With an impressive track record, this organization has continuously delivered on its promises, making it a trustworthy choice for donors.', 5); 
-await reviewData.createReview(charity1._id.toString(), '64db0c81fc13ae524108a09a', 'Their grassroots approach ensures that the needs of the local communities are always at the forefront of their initiatives.', 4); 
-await reviewData.createReview(charity2._id.toString(), '64db0c81fc13ae524108a091', 'The organizations emphasis on collaboration means they regularly partner with other groups, amplifying their impact.', 3); 
-await reviewData.createReview(charity2._id.toString(), '64db0c81fc13ae524108a0a3', 'This charitys continuous pursuit of feedback and self-improvement is commendable, reflecting a genuine desire to serve better.', 5); 
+await reviewData.createReview(charity6._id.toString(), 'Peetey', 'This charity stands out for its transparency, ensuring donors know exactly where their contributions are going.', 5);
+await reviewData.createReview(charity6._id.toString(), 'Peetey', 'Their dedication to on-ground work has made a tangible difference in communities, showcasing true commitment.', 5);
+await reviewData.createReview(charity7._id.toString(), 'Peetey', 'The organizations volunteer programs are well-structured, allowing individuals from all walks of life to contribute meaningfully.', 4); 
+await reviewData.createReview(charity7._id.toString(), 'Peetey', 'With a focus on sustainability, this charitys projects are not just a quick fix but offer long-term solutions to pressing issues.', 4); 
+await reviewData.createReview(charity1._id.toString(), 'Peetey', 'With an impressive track record, this organization has continuously delivered on its promises, making it a trustworthy choice for donors.', 5); 
+await reviewData.createReview(charity1._id.toString(), 'Peetey', 'Their grassroots approach ensures that the needs of the local communities are always at the forefront of their initiatives.', 4); 
+await reviewData.createReview(charity2._id.toString(), 'Peetey', 'The organizations emphasis on collaboration means they regularly partner with other groups, amplifying their impact.', 3); 
+await reviewData.createReview(charity2._id.toString(), 'Peetey', 'This charitys continuous pursuit of feedback and self-improvement is commendable, reflecting a genuine desire to serve better.', 5); 
 
 console.log("-------------------COMPLETE-------------------------------");
 
@@ -85,19 +85,30 @@ console.log("-------------------Seeding Donations Data--------------------------
 //variables' name: userName, charityName, giftName, giftNote, comments
 await donationData.createDonation('pAndds', 'Make a Wish', 'Mountain Bike', 'I hope you like the new bike!', 'Bikes are awesome');
 await donationData.createDonation('hasking', 'Make a Wish', 'Blankets', 'Hope everyone enjoy the new blankets!', 'Keep warm');
-await donationData.createDonation('bcess1', 'Childrens Education Foundation', 'Books', 'A little help can light up a childs future. Enjoy these educational tools!', 'Looking forward to seeing these supplies make a difference!');
+await donationData.createDonation('Peetey', 'Childrens Education Foundation', 'Books', 'A little help can light up a childs future. Enjoy these educational tools!', 'Looking forward to seeing these supplies make a difference!');
 await donationData.createDonation('hfernehough6', 'Save the Oceans', 'Reusable Water Bottles', 'Reduce single-use plastic with these bottles!', 'Every little bit counts for our planet');
 await donationData.createDonation('tpardewe', 'Animal Rescue League', 'Pet Foods', 'For our furry friends in need.', 'Remember to adopt, not shop!');
-await donationData.createDonation('cguppy8', 'Help for the Homeless', 'Tents', 'A little shelter during tough times.', 'Hope this provides some relief');
+await donationData.createDonation('Peetey', 'Help for the Homeless', 'Tents', 'A little shelter during tough times.', 'Hope this provides some relief');
 await donationData.createDonation('mbewshire0', 'Plant a Tree Foundation', 'Saplings', 'Lets make the world greener, one tree at a time!', 'Greener future ahead!');
 await donationData.createDonation('polligan2', 'Musicians Without Borders', 'Guitars', 'Music heals all wounds. Enjoy!', 'Looking forward to some great music');
 await donationData.createDonation('nmanes3', 'Local Food Bank', 'Non-perishable Foods', 'Helping out families in need.', 'Stay strong and keep going');
-await donationData.createDonation('cguppy8', 'Habitat for Humanity', 'Bricks', 'Building homes and futures.', 'Everyone deserves a roof over their head');
+await donationData.createDonation('Peetey', 'Habitat for Humanity', 'Bricks', 'Building homes and futures.', 'Everyone deserves a roof over their head');
+await donationData.createDonation('Peetey', 'Habitat for Humanity', 'Bricks', 'Building homes and futures.', 'Everyone deserves a roof over their head');
 
 console.log("-------------------COMPLETE-------------------------------");
 
 
+console.log("-------------------Seeding Gift Catalog-------------------------------");
 
+
+await giftData.createGift('Frisbee', 'Sports', 5.32, 'A yellow frisbee for a great time!');
+await giftData.createGift('Soccer Ball', 'Sports', 30.00, 'A Quality Soccer Ball');
+await giftData.createGift('Mountain Bike', 'Sports', 5.32, 'A yellow frisbee for a great time!');
+await giftData.createGift('Shampoo', 'Heatlh', 3.50, 'Dove Shampoo');
+await giftData.createGift('Toothpaste', 'Health', 2.50, 'Colgate Toothpaste');
+await giftData.createGift('Food Bundle', 'Food', 25.00, 'An essential food bundle');
+
+console.log("-------------------COMPLETE-------------------------------");
 
 
 
