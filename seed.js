@@ -16,6 +16,7 @@ await db.dropDatabase();
 // await dropCollection("charities");
 // await dropCollection("donations");
 // await dropCollection("users");
+console.log("-------------------COMPLETE-------------------------------");
 
 
 
@@ -39,15 +40,17 @@ console.log("-------------------Seeding User Data-------------------------------
 
 //user data
 //variables' name: firstName, lastName, userName, emailAddress, password, role
-let user1 = await userData.createUser('Peter','Anderson','pAndds', 'pandy1243@gmail.com', 'pF5\\3Oo\\f4/T~\\)g', 'user');
-let user2 = await userData.createUser('Heidie','Fernehough','hfernehough6', 'hfernehough6@arstechnica.com', 'sK1|2zq,GaL+MRs', 'user');
-let user3 = await userData.createUser('Horten','Askin','hasking', 'hasking@prnewswire.com', 'wI2!cY0TjAX,E', 'user');  
-let user4 = await userData.createUser('Tybi','Pardew','tpardewe', 'tpardewe@berkeley.edu', 'nT0)spb3u8' , 'user'); 
+// let user1 = await userData.createUser('Peter','Anderson','pAndds', 'pandy1243@gmail.com', 'pF5\\3Oo\\f4/T~\\)g', 'user');
+ let user2 = await userData.createUser('Heidie','Fernehough','hfernehough6', 'hfernehough6@arstechnica.com', 'sK1|2zq,GaL+MRs', 'user');
+// let user3 = await userData.createUser('Horten','Askin','hasking', 'hasking@prnewswire.com', 'wI2!cY0TjAX,E', 'user');  
+// let user4 = await userData.createUser('Tybi','Pardew','tpardewe', 'tpardewe@berkeley.edu', 'nT0)spb3u8' , 'user'); 
 // let user5 = await userData.createUser('Case','Guppy','cguppy8', 'cguppy8@newyorker.com', 'dI1.t\"2Q`', 'user');   
 // let user6 = await userData.createUser('Marge', 'Bewshire', 'mbewshire0', 'mbewshire0@va.gov', 'uT5\"E1xM', 'user');
 // let user7 = await userData.createUser('Bastien', 'Cess', 'bcess1', 'bcess1@fc2.com', 'jO4\'_0uJ0s)>', 'user');
 // let user8 = await userData.createUser('Phillipe', 'Olligan', 'polligan2', 'polligan2@intel.com', 'nP0{hqG\\1m', 'user');
 // let user9 = await userData.createUser('Norbert', 'Manes', 'nmanes3', 'nmanes3@bravesites.com', 'eM1_*mK}fpd@#\"', 'user');
+let user1 = await userData.createUser('Peter','Stirpe','Peetey', 'peterstirpe@gmail.com', '$Pecial1', 'admin');
+
 
 console.log("-------------------COMPLETE-------------------------------");
 

@@ -8,13 +8,6 @@ If the user is logged in , and 'GET /protected' endpoint is called, you will ren
 
 <main>
     <h2>Welcome {{firstName}}, the time is now: {{currentTime}}. Your role in the system is: {{role}}.</h2>
+        <a href="/charities">Charities</a>
+        <a href="/logout">Logout</a>
 </main>
-{{#if isAdmin}}
-<a href="/admin">Admin</a>
-{{/if}}
-
-<br>
-<a href="/charities">Charities</a>
-<footer>
-    <a href="/logout">Logout</a>
-</footer>
