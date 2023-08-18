@@ -10,8 +10,7 @@ const createDonation = async (
     charityName,
     giftName,
     giftNote,
-    comments,
-    donateDate
+    comments
 )=>{
 
     userName = helper.checkString(userName, 'userName');
@@ -19,8 +18,8 @@ const createDonation = async (
     giftName = helper.checkString(giftName, 'giftName');
     giftNote = helper.checkString(giftNote, 'giftNote');
     comments = validation.checkString(comments, 'comments');
-    donateDate = validation.checkDate(donateDate, 'donateDate');
 
+    const donateDate = new Date();
 
     let newDonation = {
         userName: userName,
