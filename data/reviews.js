@@ -13,7 +13,8 @@ const createReview = async (
 //input validation
 reviewText = helper.checkString(reviewText, 'review');
 rating = validation.checkRating(rating);
-userId = validation.checkId(userId, 'User Id'); //this might need to be check string depending on how the id is supplied
+// userId = validation.checkId(userId, 'User Id'); //this might need to be check string depending on how the id is supplied
+userId = validation.checkString(userId, 'User Name'); //this might need to be check string depending on how the id is supplied
 charityId = validation.checkId(charityId, 'Charity Id'); //this might need to be check string depending on how the id is supplied
 
 

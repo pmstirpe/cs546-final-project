@@ -209,7 +209,7 @@ app.set("view engine", "handlebars");
 configRoutes(app);
 
 // Seed function for creating charities
-seed.createCharities();
+await seed.createCharities();
 
 app.listen(3000, () => {
   console.log("We've now got a server!");
