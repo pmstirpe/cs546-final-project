@@ -95,14 +95,14 @@ export function checkString(strVal, varName) {
 }
 
 export function checkAmount(val) {
-  if (typeof val !== 'number' || val <= 0 || val.toString().split(".")[1].length > 2)
+  if (typeof val !== 'number' || val <= 0 || val.toString().split(".")[1].length > 2 || val > 1000000)
   throw 'invalid amount provided';
 
   return val;
 }
 
 export function checkAge(val) {
-  if (typeof val !== 'number' || val <= 0)
+  if (typeof val !== 'number' || val <= 0 || val > 112)
   throw 'invalid age provided';
 
   return val;
