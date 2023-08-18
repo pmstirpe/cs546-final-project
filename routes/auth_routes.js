@@ -2,13 +2,19 @@
 import {Router} from 'express';
 import {userData} from '../data/index.js';
 import * as helper from '../helpers.js';
+import {fileURLToPath} from 'url';
+import path from 'path';
+import { dirname } from "path";
+
 
 const router = Router();
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 router.route('/').get(async (req, res) => {
-  //code here for GET THIS ROUTE SHOULD NEVER FIRE BECAUSE OF MIDDLEWARE #1 IN SPECS.
+  
 
-  return res.json({error: 'YOU SHOULD NOT BE HERE!'});
+  return res.sendFile(path.join(__dirname, "../static", "homepage.html"));
 });
 
 router
@@ -165,6 +171,11 @@ router.route('/logout').get(async (req, res) => {
   req.session.destroy();
   //res.send('Logged out');
   res.render('logout');
+});
+
+// Display the aboutus page
+router.route("/aboutus").get(async (req, res) => {
+  return res.render("aboutus");
 });
 
 //export router
