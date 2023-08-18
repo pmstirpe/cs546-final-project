@@ -10,14 +10,15 @@ export function getCurrentDateTime(){
 }
 
 
-export function validateNewUser(firstName, lastName, emailDomain, password, role) {
+export function validateNewUser(firstName, lastName,userName, emailDomain, password, role) {
 
-    if(!firstName || !lastName || !emailDomain || !password || !role){
+    if(!firstName || !lastName ||!userName|| !emailDomain || !password || !role){
       throw 'Error: all fields must be supplied';
     }
   
     checkString(firstName, "firstName");
     checkString(lastName, "lastName");
+    checkString(userName, "userName");
     checkString(role, "role");
   
     // First and Last name check
@@ -26,6 +27,11 @@ export function validateNewUser(firstName, lastName, emailDomain, password, role
     }
     if(lastName < 2 || lastName > 25){
       throw 'Error: lastName too short or too long';
+    }
+
+    //userName check
+    if(userName < 2 || userName > 25){
+      throw 'Error: userName too short or too long';
     }
   
     // Email Check
@@ -95,8 +101,15 @@ export function checkString(strVal, varName) {
 }
 
 export function checkAmount(val) {
-  if (typeof val !== 'number' || val <= 0 || val.toString().split(".")[1].length > 2)
+  if (typeof val !== 'number' || val <= 0 || val.toString().split(".")[1].length > 2 || val > 1000000)
   throw 'invalid amount provided';
+
+  return val;
+}
+
+export function checkAge(val) {
+  if (typeof val !== 'number' || val <= 0 || val > 112)
+  throw 'invalid age provided';
 
   return val;
 }

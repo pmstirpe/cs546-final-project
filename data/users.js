@@ -7,13 +7,14 @@ import * as helper from "../helpers.js"
 const createUser = async (
   firstName,
   lastName,
+  userName,
   emailAddress,
   password,
   role
 ) => {
 
   // Do input validation
-  helper.validateNewUser(firstName, lastName, emailAddress, password, role);
+  helper.validateNewUser(firstName, lastName, userName, emailAddress, password, role);
 
   // Check for Duplicate email
   const allUsers = await getAll();
@@ -30,6 +31,7 @@ const createUser = async (
   let newUser = {
     firstName: firstName.trim(),
     lastName: lastName.trim(),
+    userName: userName.trim(),
     emailAddress: emailAddress.trim(),
     password: hash,
     role: role.trim()

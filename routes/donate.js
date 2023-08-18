@@ -12,8 +12,8 @@ const router = Router();
 
 router.route('/').get(async (req, res) => {
     try {
-        const donationList = await donationData.getAll();
-        return res.render('donations', {donations: donationList})      
+        const donationList = await donationData.getAllDonations();
+        return res.render('donate', {donations: donationList})      
     } 
         catch (e) {
         res.status(500).json({error: e});
