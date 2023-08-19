@@ -239,8 +239,8 @@ router.route("/aboutus").get(async (req, res) => {
   return res.render("aboutus");
 });
 
-// Display the Charities page
-router.route("/charity").get(async (req, res) => {
+// Display the Charities page 
+/*router.route("/charity").get(async (req, res) => {
   return res.render("charities");
 });
 
@@ -257,7 +257,7 @@ router.route("/individualsponsorship").get(async (req, res) => {
 // Display the Donate page
 router.route("/donate").get(async (req, res) => {
   return res.render("donate");
-});
+});*/
 
 //export router
 export default router;
