@@ -183,8 +183,8 @@ router.route('/profile').get(async (req, res) => {
     //get all review per user
     //Get all donations per user
     let charities = await charityData.getAll();
-    //let donations = await donationData.getByUsername(user);
-    let donations = await donationData.getByEmailAddress(req.session.user.emailAddress);
+    let donations = await donationData.getByUsername(user);
+    //let donations = await donationData.getByEmailAddress(req.session.user.emailAddress);
     let reviews = [];
     let charityNamesForReviews = [];
 

@@ -77,13 +77,12 @@ const getByUsername = async (userName) => {
     let returnArr = [];
 
     for(let i = 0; i < donationList.length; i++){
-        if(donationList[i].emailAddress === emailAddress){
+        if(donationList[i].userName === userName){
             returnArr.push(donationList[i]);
         }
     }
 
 
-     if (!donation) throw 'No donation found with that username';
     return returnArr;
   };
 
