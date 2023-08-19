@@ -5,31 +5,31 @@ import * as helper from "../helpers.js";
 import validation from "../validation.js";
 
 
-export const createDonation = async (
-    emailAddress,
+ const createDonation = async (
+    userName,
     charityName,
     giftName,
     giftNote,
     comments
 )=>{
 
-    
+    userName = helper.checkString(userName, 'userName');
     charityName = helper.checkString(charityName, 'charityName');
     giftName = helper.checkString(giftName, 'giftName');
     giftNote = helper.checkString(giftNote, 'giftNote');
     comments = validation.checkString(comments, 'comments');
 
-      emailAddress = emailAddress.toLowerCase();
-      const emailRegEx = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
-      if (!emailAddress || typeof emailAddress !== 'string' || !emailAddress.match(emailRegEx)) {
-        throw 'Error: Invalid email address';
-      }
+      // emailAddress = emailAddress.toLowerCase();
+      // const emailRegEx = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+      // if (!emailAddress || typeof emailAddress !== 'string' || !emailAddress.match(emailRegEx)) {
+      //   throw 'Error: Invalid email address';
+      // }
     
 
     const donateDate = new Date();
 
     let newDonation = {
-        emailAddress:emailAddress,
+        userName: userName,
         charityName: charityName,
         giftName: giftName,
         giftNote: giftNote,
@@ -51,7 +51,7 @@ export const createDonation = async (
 
   
 
-export const getById = async (id) => {
+ const getById = async (id) => {
 
     id = validation.checkId(id, 'Donation Id')
 
@@ -77,16 +77,18 @@ const getByUsername = async (userName) => {
     let returnArr = [];
 
     for(let i = 0; i < donationList.length; i++){
-        if(donationList[i].userName === userName){
+        if(donationList[i].emailAddress === emailAddress){
             returnArr.push(donationList[i]);
         }
     }
 
+
+     if (!donation) throw 'No donation found with that username';
     return returnArr;
   };
 
 
-export const getByEmailAddress = async (emailAddress) => {
+ const getByEmailAddress = async (emailAddress) => {
 
     if(!emailAddress) throw 'emailAddress is required.';
 
@@ -99,7 +101,7 @@ export const getByEmailAddress = async (emailAddress) => {
     }
 
     const donationCollection = await donations();
-    // const donation = await donationCollection.findOne({emailAddress: emailAddress});
+    // const donation = await donationCollection.findOne({userName: userName});
     const donationList = await donationCollection.find({}).toArray();
 
     let returnArr = [];
@@ -110,11 +112,13 @@ export const getByEmailAddress = async (emailAddress) => {
         }
     }
 
+
+    //  if (!donation) throw 'No donation found with that email address';
     return returnArr;
   };
 
 
-  export const getByCharityname = async (charityName) => {
+   const getByCharityname = async (charityName) => {
 
     if(!charityName) throw 'Charity name is required.';
 
@@ -134,7 +138,7 @@ export const getByEmailAddress = async (emailAddress) => {
   };
 
   
-  export const getByGiftname = async (giftName) => {
+   const getByGiftname = async (giftName) => {
 
     if(!giftName) throw 'Gift name is required.';
 
@@ -149,7 +153,7 @@ export const getByEmailAddress = async (emailAddress) => {
 
 
 
-export const getAllDonations = async () => {
+ const getAllDonations = async () => {
 
     const donationCollection = await donations();
     const donationList = await donationCollection.find({}).toArray();
@@ -159,7 +163,7 @@ export const getAllDonations = async () => {
   };
 
 
-export const getByDonatedate = async (donateDate) => {
+ const getByDonatedate = async (donateDate) => {
 
     if(!donateDate) throw 'Donate date is required.';
 
@@ -202,7 +206,7 @@ export const getByDonatedate = async (donateDate) => {
 
 };
 
-export const calculateAmountByDonationId = async (id) => {
+ const calculateAmountByDonationId = async (id) => {
 
     if(!id) throw 'Donation Id is required.';
 
@@ -246,7 +250,7 @@ const calculateAmountByUsername = async (userName) => {
 };
 
 
-export const calculateAmountByEmailAddress = async (emailAddress) => {
+ const calculateAmountByEmailAddress = async (emailAddress) => {
 
     if(!emailAddress) throw 'emailAddress is required.';
 
@@ -258,7 +262,7 @@ export const calculateAmountByEmailAddress = async (emailAddress) => {
     
 
     const donationCollection = await donations();
-    const donationList = await donationCollection.getByEmailAddress(emailAddress).toArray();
+    const donationList = await donationCollection.getByUserName(userName).toArray();
 
     if (!donationList || donationList.length === 0) 
         throw 'No donation found.';
@@ -275,7 +279,7 @@ export const calculateAmountByEmailAddress = async (emailAddress) => {
 };
 
 
-export const addCommentByCharityname = async (charityName, comment) => {
+ const addCommentByCharityname = async (charityName, comment) => {
 
     if(!charityName || !comment) throw 'Charity name and comment are required.';
 
@@ -317,7 +321,7 @@ const addComment = async (donationId, comment) => {
 };
 
 //same as the above one
-export const divideDonation = async (donationId) => {
+ const divideDonation = async (donationId) => {
 
     if(!donationId) throw 'Donation ID is required.';
 

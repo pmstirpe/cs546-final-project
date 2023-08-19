@@ -86,18 +86,18 @@ console.log("-------------------COMPLETE-------------------------------");
 console.log("-------------------Seeding Donations Data-------------------------------");
 
 //donation data  
-//variables' name: emailAddress, charityName, giftName, giftNote, comments
-await donationData.createDonation('tpardewe@berkeley.edu', 'Make a Wish', 'Mountain Bike', 'I hope you like the new bike!', 'Bikes are awesome');
-await donationData.createDonation('hfernehough6@arstechnica.com', 'Make a Wish', 'Blankets', 'Hope everyone enjoy the new blankets!', 'Keep warm');
-await donationData.createDonation('hasking@prnewswire.com', 'Childrens Education Foundation', 'Books', 'A little help can light up a childs future. Enjoy these educational tools!', 'Looking forward to seeing these supplies make a difference!');
-await donationData.createDonation('polligan2@intel.com', 'Save the Oceans', 'Reusable Water Bottles', 'Reduce single-use plastic with these bottles!', 'Every little bit counts for our planet');
-await donationData.createDonation('nmanes3@bravesites.com', 'Animal Rescue League', 'Pet Foods', 'For our furry friends in need.', 'Remember to adopt, not shop!');
-await donationData.createDonation('mbewshire0@va.gov', 'Help for the Homeless', 'Tents', 'A little shelter during tough times.', 'Hope this provides some relief');
-await donationData.createDonation('peterstirpe@gmail.com', 'Plant a Tree Foundation', 'Saplings', 'Lets make the world greener, one tree at a time!', 'Greener future ahead!');
-await donationData.createDonation('peterstirpe@gmail.com', 'Musicians Without Borders', 'Guitars', 'Music heals all wounds. Enjoy!', 'Looking forward to some great music');
-await donationData.createDonation('peterstirpe@gmail.com', 'Local Food Bank', 'Non-perishable Foods', 'Helping out families in need.', 'Stay strong and keep going');
-await donationData.createDonation('nmanes3@bravesites.com', 'Habitat for Humanity', 'Bricks', 'Building homes and futures.', 'Everyone deserves a roof over their head');
-//await donationData.createDonation('peterstirpe@gmail.com', 'Habitat for Humanity', 'Bricks', 'Building homes and futures.', 'Everyone deserves a roof over their head');
+//variables' name: userName, charityName, giftName, giftNote, comments
+await donationData.createDonation('pAndds', 'Make a Wish', 'Mountain Bike', 'I hope you like the new bike!', 'Bikes are awesome');
+await donationData.createDonation('hasking', 'Make a Wish', 'Blankets', 'Hope everyone enjoy the new blankets!', 'Keep warm');
+await donationData.createDonation('Peetey', 'Childrens Education Foundation', 'Books', 'A little help can light up a childs future. Enjoy these educational tools!', 'Looking forward to seeing these supplies make a difference!');
+await donationData.createDonation('hfernehough6', 'Save the Oceans', 'Reusable Water Bottles', 'Reduce single-use plastic with these bottles!', 'Every little bit counts for our planet');
+await donationData.createDonation('tpardewe', 'Animal Rescue League', 'Pet Foods', 'For our furry friends in need.', 'Remember to adopt, not shop!');
+await donationData.createDonation('Peetey', 'Help for the Homeless', 'Tents', 'A little shelter during tough times.', 'Hope this provides some relief');
+await donationData.createDonation('mbewshire0', 'Plant a Tree Foundation', 'Saplings', 'Lets make the world greener, one tree at a time!', 'Greener future ahead!');
+await donationData.createDonation('polligan2', 'Musicians Without Borders', 'Guitars', 'Music heals all wounds. Enjoy!', 'Looking forward to some great music');
+await donationData.createDonation('nmanes3', 'Local Food Bank', 'Non-perishable Foods', 'Helping out families in need.', 'Stay strong and keep going');
+await donationData.createDonation('Peetey', 'Habitat for Humanity', 'Bricks', 'Building homes and futures.', 'Everyone deserves a roof over their head');
+//await donationData.createDonation('Peetey', 'Habitat for Humanity', 'Bricks', 'Building homes and futures.', 'Everyone deserves a roof over their head');
 
 console.log("-------------------COMPLETE-------------------------------");
 
@@ -120,8 +120,8 @@ console.log("-------------------COMPLETE-------------------------------");
 
 // console.log("-------------------Seeding Comment Data-------------------------------");
   
-// //comments data
-// //variables' name: userId, donationId, commentText
+//comments data
+//variables' name: userId, donationId, commentText
 // await commentData.createComment('64db0c47fc13ae504608a05c', '64db0c47fc13ae504608a069', 'Hope this could help you a bit!');
 // await commentData.createComment('64db0c47fc13ae504608a05d', '64db0c47fc13ae504608a06a', 'Sending love and support through this donation.');
 // await commentData.createComment('64db0c47fc13ae504608a05e', '64db0c47fc13ae504608a06b', 'Every bit counts. Glad to be a part of this cause!');
