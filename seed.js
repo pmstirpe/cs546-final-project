@@ -118,19 +118,19 @@ console.log("-------------------COMPLETE-------------------------------");
 
   
 
-console.log("-------------------Seeding Comment Data-------------------------------");
+// console.log("-------------------Seeding Comment Data-------------------------------");
   
-//comments data
-//variables' name: userId, donationId, commentText
-await commentData.createComment('64db0c47fc13ae504608a05c', '64db0c47fc13ae504608a069', 'Hope this could help you a bit!');
-await commentData.createComment('64db0c47fc13ae504608a05d', '64db0c47fc13ae504608a06a', 'Sending love and support through this donation.');
-await commentData.createComment('64db0c47fc13ae504608a05e', '64db0c47fc13ae504608a06b', 'Every bit counts. Glad to be a part of this cause!');
-await commentData.createComment('64db0c47fc13ae504608a05f', '64db0c47fc13ae504608a06c', 'Together, we can make a difference.');
-await commentData.createComment('64db0c47fc13ae504608a060', '64db0c47fc13ae504608a06d', 'Happy to contribute. Let's change lives together!');
-await commentData.createComment('64db0c47fc13ae504608a061', '64db0c47fc13ae504608a06e', 'Believing in the cause and happy to support.');
+// //comments data
+// //variables' name: userId, donationId, commentText
+// await commentData.createComment('64db0c47fc13ae504608a05c', '64db0c47fc13ae504608a069', 'Hope this could help you a bit!');
+// await commentData.createComment('64db0c47fc13ae504608a05d', '64db0c47fc13ae504608a06a', 'Sending love and support through this donation.');
+// await commentData.createComment('64db0c47fc13ae504608a05e', '64db0c47fc13ae504608a06b', 'Every bit counts. Glad to be a part of this cause!');
+// await commentData.createComment('64db0c47fc13ae504608a05f', '64db0c47fc13ae504608a06c', 'Together, we can make a difference.');
+// await commentData.createComment('64db0c47fc13ae504608a060', '64db0c47fc13ae504608a06d', 'Happy to contribute. Let's change lives together!');
+// await commentData.createComment('64db0c47fc13ae504608a061', '64db0c47fc13ae504608a06e', 'Believing in the cause and happy to support.');
 
   
-console.log("-------------------COMPLETE-------------------------------");
+// console.log("-------------------COMPLETE-------------------------------");
 
 
 };

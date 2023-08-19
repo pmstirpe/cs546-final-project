@@ -64,28 +64,26 @@ export const getById = async (id) => {
   };
 
 
-// const getByUsername = async (userName) => {
+const getByUsername = async (userName) => {
 
-//     if(!userName) throw 'Username is required.';
+    if(!userName) throw 'Username is required.';
 
-//     userName = validation.checkString(userName, 'Donator username')
+    userName = validation.checkString(userName, 'Donator username')
 
-//     const donationCollection = await donations();
-//     // const donation = await donationCollection.findOne({userName: userName});
-//     const donationList = await donationCollection.find({}).toArray();
+    const donationCollection = await donations();
+    // const donation = await donationCollection.findOne({userName: userName});
+    const donationList = await donationCollection.find({}).toArray();
 
-//     let returnArr = [];
+    let returnArr = [];
 
-//     for(let i = 0; i < donationList.length; i++){
-//         if(donationList[i].userName === userName){
-//             returnArr.push(donationList[i]);
-//         }
-//     }
+    for(let i = 0; i < donationList.length; i++){
+        if(donationList[i].userName === userName){
+            returnArr.push(donationList[i]);
+        }
+    }
 
-
-//      if (!donation) throw 'No donation found with that username';
-//     return returnArr;
-//   };
+    return returnArr;
+  };
 
 
 export const getByEmailAddress = async (emailAddress) => {
@@ -101,19 +99,17 @@ export const getByEmailAddress = async (emailAddress) => {
     }
 
     const donationCollection = await donations();
-    const donation = await donationCollection.findOne({emailAddress: emailAddress});
+    // const donation = await donationCollection.findOne({emailAddress: emailAddress});
     const donationList = await donationCollection.find({}).toArray();
 
     let returnArr = [];
 
     for(let i = 0; i < donationList.length; i++){
-        if(donationList[i].userName === userName){
+        if(donationList[i].emailAddress === emailAddress){
             returnArr.push(donationList[i]);
         }
     }
 
-
-     if (!donation) throw 'No donation found with that email address';
     return returnArr;
   };
 
@@ -228,26 +224,26 @@ export const calculateAmountByDonationId = async (id) => {
 };
 
 
-// const calculateAmountByUsername = async (userName) => {
+const calculateAmountByUsername = async (userName) => {
 
-//     if(!userName) throw 'Username is required.';
+    if(!userName) throw 'Username is required.';
 
-//     const donationCollection = await donations();
-//     const donationList = await donationCollection.getByUserName(userName).toArray();
+    const donationCollection = await donations();
+    const donationList = await donationCollection.getByUserName(userName).toArray();
 
-//     if (!donationList || donationList.length === 0) 
-//         throw 'No donation found.';
+    if (!donationList || donationList.length === 0) 
+        throw 'No donation found.';
 
-//     let donationSum = 0;
+    let donationSum = 0;
     
-//     donationList.forEach(donation => {
-//         donationSum += donation.giftName.price;
-//     });
+    donationList.forEach(donation => {
+        donationSum += donation.giftName.price;
+    });
 
-//     if (!donationList) throw 'No donation found.';
-//         return donationSum;
+    if (!donationList) throw 'No donation found.';
+        return donationSum;
 
-// };
+};
 
 
 export const calculateAmountByEmailAddress = async (emailAddress) => {
@@ -305,20 +301,20 @@ export const addCommentByCharityname = async (charityName, comment) => {
 };
 
 // //not sure about the donationId parameter
-// const addComment = async (donationId, comment) => {
+const addComment = async (donationId, comment) => {
 
-//     if(!donationId || !comment) throw 'Donation ID and comment are required.';
+    if(!donationId || !comment) throw 'Donation ID and comment are required.';
 
-//     const donationCollection = await donations();
-//     const updateResult = await donationCollection.updateOne({_id: new ObjectId(donationId)}, {$set: {comment: comment}});
+    const donationCollection = await donations();
+    const updateResult = await donationCollection.updateOne({_id: new ObjectId(donationId)}, {$set: {comment: comment}});
     
-//     if (updateResult.modifiedCount === 0) {
-//         throw 'Failed to update the donation with comment.';
-//     }
+    if (updateResult.modifiedCount === 0) {
+        throw 'Failed to update the donation with comment.';
+    }
 
-//     return {message: "Comment added successfully."};
+    return {message: "Comment added successfully."};
 
-// };
+};
 
 //same as the above one
 export const divideDonation = async (donationId) => {
@@ -342,4 +338,4 @@ export const divideDonation = async (donationId) => {
 
 };
 
-export default {createDonation, getById, getByUsername, getByCharityname, getByGiftname, getAllDonations, getByDonatedate, calculateAmountByDonationId, calculateAmountByUsername, addCommentByCharityname, addComment, divideDonation};
+export default {createDonation, getById, getByUsername, getByCharityname, getByGiftname, getByEmailAddress, getAllDonations, getByDonatedate, calculateAmountByDonationId, calculateAmountByUsername, addCommentByCharityname, addComment, divideDonation};
