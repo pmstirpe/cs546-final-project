@@ -60,12 +60,16 @@ console.log("-------------------Seeding Reviews Data----------------------------
 
   //reviews data
   //variables' name: charityId, userId, reviewText, rating(max 5)
+  // userId might be  objectId instead of below ones. the below ones are username we did not include in the review function.
 await reviewData.createReview(charity1._id.toString(), 'pAndds', 'this is a great charity!', 5);
 await reviewData.createReview(charity1._id.toString(), 'hfernehough6', 'this is a bad charity!', 1);
 await reviewData.createReview(charity2._id.toString(), 'hasking', 'this is an ok charity', 3);
 await reviewData.createReview(charity2._id.toString(), 'tpardewe', 'Good charity, could do better', 3);
 
   //I will assume the charity variable name to be charity6,charity7, etc. If anyone create other variable name, please change the variable names below, thanks.
+  // one person is only allow to leave one comment and one review for each charity, also, the username variable is not created in review.js
+ // BTW, I think in review.js or comment.js, we didn't limit the number into 1.
+  
 await reviewData.createReview(charity6._id.toString(), 'Peetey', 'This charity stands out for its transparency, ensuring donors know exactly where their contributions are going.', 5);
 await reviewData.createReview(charity6._id.toString(), 'Peetey', 'Their dedication to on-ground work has made a tangible difference in communities, showcasing true commitment.', 5);
 await reviewData.createReview(charity7._id.toString(), 'Peetey', 'The organizations volunteer programs are well-structured, allowing individuals from all walks of life to contribute meaningfully.', 4); 
@@ -82,18 +86,18 @@ console.log("-------------------COMPLETE-------------------------------");
 console.log("-------------------Seeding Donations Data-------------------------------");
 
 //donation data  
-//variables' name: userName, charityName, giftName, giftNote, comments
-await donationData.createDonation('pAndds', 'Make a Wish', 'Mountain Bike', 'I hope you like the new bike!', 'Bikes are awesome');
-await donationData.createDonation('hasking', 'Make a Wish', 'Blankets', 'Hope everyone enjoy the new blankets!', 'Keep warm');
-await donationData.createDonation('Peetey', 'Childrens Education Foundation', 'Books', 'A little help can light up a childs future. Enjoy these educational tools!', 'Looking forward to seeing these supplies make a difference!');
-await donationData.createDonation('hfernehough6', 'Save the Oceans', 'Reusable Water Bottles', 'Reduce single-use plastic with these bottles!', 'Every little bit counts for our planet');
-await donationData.createDonation('tpardewe', 'Animal Rescue League', 'Pet Foods', 'For our furry friends in need.', 'Remember to adopt, not shop!');
-await donationData.createDonation('Peetey', 'Help for the Homeless', 'Tents', 'A little shelter during tough times.', 'Hope this provides some relief');
-await donationData.createDonation('mbewshire0', 'Plant a Tree Foundation', 'Saplings', 'Lets make the world greener, one tree at a time!', 'Greener future ahead!');
-await donationData.createDonation('polligan2', 'Musicians Without Borders', 'Guitars', 'Music heals all wounds. Enjoy!', 'Looking forward to some great music');
-await donationData.createDonation('nmanes3', 'Local Food Bank', 'Non-perishable Foods', 'Helping out families in need.', 'Stay strong and keep going');
-await donationData.createDonation('Peetey', 'Habitat for Humanity', 'Bricks', 'Building homes and futures.', 'Everyone deserves a roof over their head');
-//await donationData.createDonation('Peetey', 'Habitat for Humanity', 'Bricks', 'Building homes and futures.', 'Everyone deserves a roof over their head');
+//variables' name: emailAddress, charityName, giftName, giftNote, comments
+await donationData.createDonation('tpardewe@berkeley.edu', 'Make a Wish', 'Mountain Bike', 'I hope you like the new bike!', 'Bikes are awesome');
+await donationData.createDonation('hfernehough6@arstechnica.com', 'Make a Wish', 'Blankets', 'Hope everyone enjoy the new blankets!', 'Keep warm');
+await donationData.createDonation('hasking@prnewswire.com', 'Childrens Education Foundation', 'Books', 'A little help can light up a childs future. Enjoy these educational tools!', 'Looking forward to seeing these supplies make a difference!');
+await donationData.createDonation('polligan2@intel.com', 'Save the Oceans', 'Reusable Water Bottles', 'Reduce single-use plastic with these bottles!', 'Every little bit counts for our planet');
+await donationData.createDonation('nmanes3@bravesites.com', 'Animal Rescue League', 'Pet Foods', 'For our furry friends in need.', 'Remember to adopt, not shop!');
+await donationData.createDonation('mbewshire0@va.gov', 'Help for the Homeless', 'Tents', 'A little shelter during tough times.', 'Hope this provides some relief');
+await donationData.createDonation('peterstirpe@gmail.com', 'Plant a Tree Foundation', 'Saplings', 'Lets make the world greener, one tree at a time!', 'Greener future ahead!');
+await donationData.createDonation('peterstirpe@gmail.com', 'Musicians Without Borders', 'Guitars', 'Music heals all wounds. Enjoy!', 'Looking forward to some great music');
+await donationData.createDonation('peterstirpe@gmail.com', 'Local Food Bank', 'Non-perishable Foods', 'Helping out families in need.', 'Stay strong and keep going');
+await donationData.createDonation('nmanes3@bravesites.com', 'Habitat for Humanity', 'Bricks', 'Building homes and futures.', 'Everyone deserves a roof over their head');
+//await donationData.createDonation('peterstirpe@gmail.com', 'Habitat for Humanity', 'Bricks', 'Building homes and futures.', 'Everyone deserves a roof over their head');
 
 console.log("-------------------COMPLETE-------------------------------");
 
@@ -102,6 +106,7 @@ console.log("-------------------Seeding Gift Catalog----------------------------
 
 //gifts data
 //variables' name: giftName,category,price,reviewText
+// please double check with Kalpana if we are going to set the category as just monthly or one-time, or like these categories below.
 await giftData.createGift('Frisbee', 'Sports', 5.32, 'A yellow frisbee for a great time!');
 await giftData.createGift('Soccer Ball', 'Sports', 30.00, 'A Quality Soccer Ball');
 await giftData.createGift('Mountain Bike', 'Sports', 5.32, 'A yellow frisbee for a great time!');
@@ -111,13 +116,21 @@ await giftData.createGift('Food Bundle', 'Food', 25.00, 'An essential food bundl
 
 console.log("-------------------COMPLETE-------------------------------");
 
+  
 
-
+console.log("-------------------Seeding Comment Data-------------------------------");
+  
 //comments data
 //variables' name: userId, donationId, commentText
-//await commentData.createComment();
+await commentData.createComment('64db0c47fc13ae504608a05c', '64db0c47fc13ae504608a069', 'Hope this could help you a bit!');
+await commentData.createComment('64db0c47fc13ae504608a05d', '64db0c47fc13ae504608a06a', 'Sending love and support through this donation.');
+await commentData.createComment('64db0c47fc13ae504608a05e', '64db0c47fc13ae504608a06b', 'Every bit counts. Glad to be a part of this cause!');
+await commentData.createComment('64db0c47fc13ae504608a05f', '64db0c47fc13ae504608a06c', 'Together, we can make a difference.');
+await commentData.createComment('64db0c47fc13ae504608a060', '64db0c47fc13ae504608a06d', 'Happy to contribute. Let's change lives together!');
+await commentData.createComment('64db0c47fc13ae504608a061', '64db0c47fc13ae504608a06e', 'Believing in the cause and happy to support.');
 
-
+  
+console.log("-------------------COMPLETE-------------------------------");
 
 
 };
