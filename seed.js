@@ -93,14 +93,15 @@ await donationData.createDonation('mbewshire0', 'Plant a Tree Foundation', 'Sapl
 await donationData.createDonation('polligan2', 'Musicians Without Borders', 'Guitars', 'Music heals all wounds. Enjoy!', 'Looking forward to some great music');
 await donationData.createDonation('nmanes3', 'Local Food Bank', 'Non-perishable Foods', 'Helping out families in need.', 'Stay strong and keep going');
 await donationData.createDonation('Peetey', 'Habitat for Humanity', 'Bricks', 'Building homes and futures.', 'Everyone deserves a roof over their head');
-await donationData.createDonation('Peetey', 'Habitat for Humanity', 'Bricks', 'Building homes and futures.', 'Everyone deserves a roof over their head');
+//await donationData.createDonation('Peetey', 'Habitat for Humanity', 'Bricks', 'Building homes and futures.', 'Everyone deserves a roof over their head');
 
 console.log("-------------------COMPLETE-------------------------------");
 
 
 console.log("-------------------Seeding Gift Catalog-------------------------------");
 
-
+//gifts data
+//variables' name: giftName,category,price,reviewText
 await giftData.createGift('Frisbee', 'Sports', 5.32, 'A yellow frisbee for a great time!');
 await giftData.createGift('Soccer Ball', 'Sports', 30.00, 'A Quality Soccer Ball');
 await giftData.createGift('Mountain Bike', 'Sports', 5.32, 'A yellow frisbee for a great time!');
@@ -117,9 +118,6 @@ console.log("-------------------COMPLETE-------------------------------");
 //await commentData.createComment();
 
 
-//gifts data
-//variables' name: giftName,category,price,reviewText
-//await giftData.createGift();
 
 
 };
