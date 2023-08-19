@@ -98,7 +98,7 @@ main {
 }
 
 .btn-donate {
-  background-color: #ff6600;
+  background-color: #d11306;
   color: #fff;
   padding: 10px 20px;
   border: none;
@@ -107,6 +107,10 @@ main {
   text-transform: uppercase;
   text-decoration: none;
   display: inline-block;
+}
+
+.btn-donate:hover{
+  background-color: #e05734;
 }
 
 .programs {
@@ -308,15 +312,22 @@ input[type="search"]:focus {
 
 .menuButton{
   border:none;
-  height:40px;
+  height:60px;
   border-radius:5px;
   padding:15px 15px;
   font-size:18px;
   cursor:pointer;
+  color:#000;
+  background-color: #c3cace;
+  text-decoration: none;
 }
 
 .menuButton:hover{
-  background-color:#ddd;
+  background-color:#86c5f1;
+}
+
+.menuButton:visited{
+  text-decoration: none;
 }
 
 
