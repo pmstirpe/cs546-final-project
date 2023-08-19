@@ -228,9 +228,35 @@ router.route('/logout').get(async (req, res) => {
   res.render('logout');
 });
 
+
+// Display the signin page
+router.route("/signin").get(async (req, res) => {
+  return res.render("login");
+});
+
 // Display the aboutus page
 router.route("/aboutus").get(async (req, res) => {
   return res.render("aboutus");
+});
+
+// Display the Charities page
+router.route("/charity").get(async (req, res) => {
+  return res.render("charities");
+});
+
+// Display the Gift Catalog page
+router.route("/gifts").get(async (req, res) => {
+  return res.render("giftCatalog");
+});
+
+// Display the Individual Sponsorship page
+router.route("/individualsponsorship").get(async (req, res) => {
+  return res.render("individualSponsor");
+});
+
+// Display the Donate page
+router.route("/donate").get(async (req, res) => {
+  return res.render("donate");
 });
 
 //export router
