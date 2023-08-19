@@ -92,6 +92,9 @@ const getCharityByName = async (charityName) => {
         returnCharity = charities[i];
       }
     }
+
+    if (charity === undefined) throw 'No charity with that name';
+
     return returnCharity;
 };
 
