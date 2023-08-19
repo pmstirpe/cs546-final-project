@@ -1,5 +1,6 @@
 import {Router} from 'express';
 import {donationData} from '../data/index.js';
+import {charityData} from '../data/index.js';
 import {ObjectId} from 'mongodb';
 import * as helper from '../helpers.js';
 import validation from "../validation.js";
@@ -13,7 +14,8 @@ const router = Router();
 router.route('/').get(async (req, res) => {
     try {
         const donationList = await donationData.getAllDonations();
-        return res.render('donate', {donations: donationList})      
+        const charityList = await charityData.getAll();
+        return res.render('donate', {donations: donationList, charities: charityList})      
     } 
         catch (e) {
         res.status(500).json({error: e});
@@ -29,16 +31,23 @@ router.route('/').get(async (req, res) => {
     try {
         donation.userName = helper.checkString(donation.userName, 'user name');
         donation.charityName = helper.checkString(donation.charityName, 'charity name');
-        donation.giftName = helper.checkString(donation.giftName, 'giftName');
+        donation.giftName = helper.checkString(donation.giftName, 'gift name');
+        donation.amount = helper.checkAmount(parseInt(donation.amount));
+
+        if(donation.charityName.toLowerCase() !== 'all')
+            await charityData.getCharityByName(donation.charityName);
+        else 
+            donation.charityName = 'All';
+        
+        if (!donation.giftNote)
+            donation.giftNote = 'N/A';
+
         donation.giftNote = helper.checkString(donation.giftNote, 'gift note');
-        donation.donateDate = validation.checkDate(donation.donateDate);
 
-        if (donation.comments) {
-            donation.comments = helper.checkString(donation.comments, 'comments');
-        }
+        await donationData.createDonation(donation.userName, donation.charityName, donation.giftName, donation.giftNote
+        );
 
-        const newDonation = await donationData.createDonation(donation);
-        res.status(200).json(newDonation);
+        res.status(200).render('thankyou');
 
     } catch (e) {
         res.status(500).json({ error: e });
