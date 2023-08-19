@@ -5,24 +5,31 @@ import * as helper from "../helpers.js";
 import validation from "../validation.js";
 
 
-const createDonation = async (
-    userName,
+export const createDonation = async (
+    emailAddress,
     charityName,
     giftName,
     giftNote,
     comments
 )=>{
 
-    userName = helper.checkString(userName, 'userName');
+    
     charityName = helper.checkString(charityName, 'charityName');
     giftName = helper.checkString(giftName, 'giftName');
     giftNote = helper.checkString(giftNote, 'giftNote');
     comments = validation.checkString(comments, 'comments');
 
+      emailAddress = emailAddress.toLowerCase();
+      const emailRegEx = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+      if (!emailAddress || typeof emailAddress !== 'string' || !emailAddress.match(emailRegEx)) {
+        throw 'Error: Invalid email address';
+      }
+    
+
     const donateDate = new Date();
 
     let newDonation = {
-        userName: userName,
+        emailAddress:emailAddress,
         charityName: charityName,
         giftName: giftName,
         giftNote: giftNote,
@@ -44,7 +51,7 @@ const createDonation = async (
 
   
 
-const getById = async (id) => {
+export const getById = async (id) => {
 
     id = validation.checkId(id, 'Donation Id')
 
@@ -57,14 +64,44 @@ const getById = async (id) => {
   };
 
 
-const getByUsername = async (userName) => {
+// const getByUsername = async (userName) => {
 
-    if(!userName) throw 'Username is required.';
+//     if(!userName) throw 'Username is required.';
 
-    userName = validation.checkString(userName, 'Donator username')
+//     userName = validation.checkString(userName, 'Donator username')
+
+//     const donationCollection = await donations();
+//     // const donation = await donationCollection.findOne({userName: userName});
+//     const donationList = await donationCollection.find({}).toArray();
+
+//     let returnArr = [];
+
+//     for(let i = 0; i < donationList.length; i++){
+//         if(donationList[i].userName === userName){
+//             returnArr.push(donationList[i]);
+//         }
+//     }
+
+
+//      if (!donation) throw 'No donation found with that username';
+//     return returnArr;
+//   };
+
+
+export const getByEmailAddress = async (emailAddress) => {
+
+    if(!emailAddress) throw 'emailAddress is required.';
+
+    emailAddress = validation.checkString(emailAddress, 'Donator emailAddress')
+
+    emailAddress = emailAddress.toLowerCase();
+    const emailRegEx = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+    if (!emailAddress || typeof emailAddress !== 'string' || !emailAddress.match(emailRegEx)) {
+       throw 'Error: Invalid email address';
+    }
 
     const donationCollection = await donations();
-    // const donation = await donationCollection.findOne({userName: userName});
+    const donation = await donationCollection.findOne({emailAddress: emailAddress});
     const donationList = await donationCollection.find({}).toArray();
 
     let returnArr = [];
@@ -76,12 +113,12 @@ const getByUsername = async (userName) => {
     }
 
 
-    // if (!donation) throw 'No donation found with that username';
+     if (!donation) throw 'No donation found with that email address';
     return returnArr;
   };
 
 
-  const getByCharityname = async (charityName) => {
+  export const getByCharityname = async (charityName) => {
 
     if(!charityName) throw 'Charity name is required.';
 
@@ -101,7 +138,7 @@ const getByUsername = async (userName) => {
   };
 
   
-  const getByGiftname = async (giftName) => {
+  export const getByGiftname = async (giftName) => {
 
     if(!giftName) throw 'Gift name is required.';
 
@@ -116,7 +153,7 @@ const getByUsername = async (userName) => {
 
 
 
-const getAllDonations = async () => {
+export const getAllDonations = async () => {
 
     const donationCollection = await donations();
     const donationList = await donationCollection.find({}).toArray();
@@ -126,7 +163,7 @@ const getAllDonations = async () => {
   };
 
 
-const getByDonatedate = async (donateDate) => {
+export const getByDonatedate = async (donateDate) => {
 
     if(!donateDate) throw 'Donate date is required.';
 
@@ -137,7 +174,7 @@ const getByDonatedate = async (donateDate) => {
 
     const donation = await donationCollection.findOne({donateDate: donateDate});
 
-    //This part still has logic error, not sure what the parameter should be. But please compare the date with current date and create date
+    //please compare the date with current date and create date
     const charity = await charityCollection.findOne({donateDate: donateDate}); 
     if (!charity || !charity.createDate) throw 'No charity or creation date found.';
     const createDate = new Date(charity.createDate);
@@ -169,7 +206,7 @@ const getByDonatedate = async (donateDate) => {
 
 };
 
-const calculateAmountByDonationId = async (id) => {
+export const calculateAmountByDonationId = async (id) => {
 
     if(!id) throw 'Donation Id is required.';
 
@@ -191,12 +228,41 @@ const calculateAmountByDonationId = async (id) => {
 };
 
 
-const calculateAmountByUsername = async (userName) => {
+// const calculateAmountByUsername = async (userName) => {
 
-    if(!userName) throw 'Username is required.';
+//     if(!userName) throw 'Username is required.';
+
+//     const donationCollection = await donations();
+//     const donationList = await donationCollection.getByUserName(userName).toArray();
+
+//     if (!donationList || donationList.length === 0) 
+//         throw 'No donation found.';
+
+//     let donationSum = 0;
+    
+//     donationList.forEach(donation => {
+//         donationSum += donation.giftName.price;
+//     });
+
+//     if (!donationList) throw 'No donation found.';
+//         return donationSum;
+
+// };
+
+
+export const calculateAmountByEmailAddress = async (emailAddress) => {
+
+    if(!emailAddress) throw 'emailAddress is required.';
+
+    emailAddress = emailAddress.toLowerCase();
+    const emailRegEx = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+    if (!emailAddress || typeof emailAddress !== 'string' || !emailAddress.match(emailRegEx)) {
+       throw 'Error: Invalid email address';
+    }
+    
 
     const donationCollection = await donations();
-    const donationList = await donationCollection.getByUserName(userName).toArray();
+    const donationList = await donationCollection.getByEmailAddress(emailAddress).toArray();
 
     if (!donationList || donationList.length === 0) 
         throw 'No donation found.';
@@ -213,7 +279,7 @@ const calculateAmountByUsername = async (userName) => {
 };
 
 
-const addCommentByCharityname = async (charityName, comment) => {
+export const addCommentByCharityname = async (charityName, comment) => {
 
     if(!charityName || !comment) throw 'Charity name and comment are required.';
 
@@ -238,24 +304,24 @@ const addCommentByCharityname = async (charityName, comment) => {
 
 };
 
-//not sure about the donationId parameter
-const addComment = async (donationId, comment) => {
+// //not sure about the donationId parameter
+// const addComment = async (donationId, comment) => {
 
-    if(!donationId || !comment) throw 'Donation ID and comment are required.';
+//     if(!donationId || !comment) throw 'Donation ID and comment are required.';
 
-    const donationCollection = await donations();
-    const updateResult = await donationCollection.updateOne({_id: new ObjectId(donationId)}, {$set: {comment: comment}});
+//     const donationCollection = await donations();
+//     const updateResult = await donationCollection.updateOne({_id: new ObjectId(donationId)}, {$set: {comment: comment}});
     
-    if (updateResult.modifiedCount === 0) {
-        throw 'Failed to update the donation with comment.';
-    }
+//     if (updateResult.modifiedCount === 0) {
+//         throw 'Failed to update the donation with comment.';
+//     }
 
-    return {message: "Comment added successfully."};
+//     return {message: "Comment added successfully."};
 
-};
+// };
 
 //same as the above one
-const divideDonation = async (donationId) => {
+export const divideDonation = async (donationId) => {
 
     if(!donationId) throw 'Donation ID is required.';
 
