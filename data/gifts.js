@@ -46,7 +46,7 @@ const getAll = async () => {
 
   const get = async (id) => {
     validation.checkId(id, 'Gift Id')
-    const giftCollection = await users();
+    const giftCollection = await gifts();
     const gift = await giftCollection.findOne({_id: new ObjectId(id)});
     if (gift === null) throw 'No gift with that id';
     gift._id = gift._id.toString();
