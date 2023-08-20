@@ -61,6 +61,9 @@ router.route('/').get(async (req, res) => {
             var giftName = gift.giftName;
         }
 
+        if (!req.session.user)
+            throw `cannot donate without being logged in`;
+
         await donationData.createDonation(req.session.user.userName, charityName, giftName, donation.giftNote
         );
 
