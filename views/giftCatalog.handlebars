@@ -13,16 +13,31 @@
             </h4>
           </li><br>
         </div>
-        <div class="col-md-2">
-          <select  name="selectCharity" onchange="showDonateButton(this,'{{this._id}}');">
+        <!--<div class="col-md-2">
+          <select  id="selectedCharity" name="selectCharity" onchange="showDonateButton(this,'{{this._id}}');">
             <option value="-1">-- Select Charity --</option>
             {{#each ../charities}}
               <option value="{{this._id}}">{{this.charityName}}</option>
             {{/each}}
           </select>
-        </div>
+        </div>-->
         <div class="col-md-2">
-          <a href="/donate" id="btnGiftDonate{{this._id}}" class="btn-donate" style="display:none;">Donate</a>
+          <form action="/giftDonation" method="GET" id="gift-form">
+          <select  id="charityId" name="charityId" onchange="showDonateButton(this,'{{this._id}}');">
+            <option value="-1">-- Select Charity --</option>
+            {{#each ../charities}}
+              <option value="{{this._id}}">{{this.charityName}}</option>
+            {{/each}}
+          </select>
+           <select name="charityId" id="charityId" hidden>
+            <option value=""></option>
+           </select>
+           <select name="giftId" id="giftId" hidden>
+            <option value={{this._id}}></option>
+           </select>
+           <button type="submit" id="btnGiftDonate{{this._id}}" class="btn-donate" style="display:none;">Donate</button>
+           </form>
+          <!--<a href="/giftDonation" id="btnGiftDonate{{this._id}}" class="btn-donate" style="display:none;">Donate</a> -->
         </div>
       </div>
       {{/each}}
