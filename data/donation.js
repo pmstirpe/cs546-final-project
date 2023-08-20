@@ -308,14 +308,14 @@ const addComment = async (donationId, comment) => {
     const donationCollection = await donations();
 
 
-    const existingDonationWithComment = await donationCollection.findOne({
+    /*const existingDonationWithComment = await donationCollection.findOne({
         _id: new ObjectId(donationId),
         comments: 'No comment yet'
     });
 
     if (!existingDonationWithComment) {
         throw 'A comment for this charity already exists. Only one comment is allowed per charity.';
-    }
+    }*/
 
 
     const updateResult = await donationCollection.updateOne({_id: new ObjectId(donationId)}, {$set: {comments: comment}});
