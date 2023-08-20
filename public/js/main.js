@@ -224,3 +224,5 @@ function showDonateButton(select, giftId) {
     document.getElementById(`btnGiftDonate${giftId}`).style.display = "none";
   } else {
     document.getElementById(`btnGiftDonate${giftId}`).style.display = "";
+  }
+}
