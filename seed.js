@@ -108,9 +108,9 @@ console.log("-------------------Seeding Gift Catalog----------------------------
 //variables' name: giftName,category,price,reviewText
 // please double check with Kalpana if we are going to set the category as just monthly or one-time, or like these categories below.
 await giftData.createGift('Frisbee', 'Sports', 5.32, 'A yellow frisbee for a great time!');
-await giftData.createGift('Soccer Ball', 'Sports', 30.00, 'A Quality Soccer Ball');
-await giftData.createGift('Mountain Bike', 'Sports', 5.32, 'A yellow frisbee for a great time!');
-await giftData.createGift('Shampoo', 'Heatlh', 3.50, 'Dove Shampoo');
+await giftData.createGift('Soccer Ball', 'Sports', 30.00, 'A Quality Soccer Ball!');
+await giftData.createGift('Mountain Bike', 'Sports', 5.32, 'Bicycles help deliver critical care');
+await giftData.createGift('Shampoo', 'Heatlh', 3.50, 'Natuaral Calia Shampoo!');
 await giftData.createGift('Toothpaste', 'Health', 2.50, 'Colgate Toothpaste');
 await giftData.createGift('Food Bundle', 'Food', 25.00, 'An essential food bundle');
 
