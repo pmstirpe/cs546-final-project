@@ -6,6 +6,7 @@ let donateButon = document.getElementById('donate-button');
 let ageForm = document.getElementById('age-search-form');
 let locationForm = document.getElementById('location-search-form');
 let donateForm = document.getElementById('donate-form');
+let giftForm = document.getElementById('gift-form');
 
 if (loginForm) {
   loginForm.addEventListener("submit", (event) => {
@@ -226,3 +227,4 @@ function showDonateButton(select, giftId) {
     document.getElementById(`btnGiftDonate${giftId}`).style.display = "";
   }
 }
+
