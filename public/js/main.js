@@ -8,130 +8,125 @@ let locationForm = document.getElementById('location-search-form');
 let donateForm = document.getElementById('donate-form');
 
 if (loginForm) {
-  loginForm.addEventListener('submit', (event) => {
-    console.log('Login Form submission fired');
+  loginForm.addEventListener("submit", (event) => {
+    console.log("Login Form submission fired");
     event.preventDefault();
-    let emailAddress = document.getElementById('emailAddressInput');
-    let password = document.getElementById('passwordInput');
-    let errorDiv = document.getElementById('loginErrors');
+    let emailAddress = document.getElementById("emailAddressInput");
+    let password = document.getElementById("passwordInput");
+    let errorDiv = document.getElementById("loginErrors");
 
-    if (emailAddress.value.trim() === '') {
+    if (emailAddress.value.trim() === "") {
       errorDiv.hidden = false;
-      errorDiv.innerHTML = 'You must enter a value for username';
+      errorDiv.innerHTML = "You must enter a value for username";
       return false;
     }
 
-    if (password.value.trim() === '') {
+    if (password.value.trim() === "") {
       errorDiv.hidden = false;
-      errorDiv.innerHTML = 'You must enter a value for password';
+      errorDiv.innerHTML = "You must enter a value for password";
       return false;
     }
 
     event.target.submit();
   });
-
-
 }
 
-if(registrationForm){
-  registrationForm.addEventListener('submit', (event) => {
-    console.log('Registration Form submission fired');
+if (registrationForm) {
+  registrationForm.addEventListener("submit", (event) => {
+    console.log("Registration Form submission fired");
     event.preventDefault();
-    let errorDiv = document.getElementById('registerErrors');
-    let emailAddress = document.getElementById('emailAddressInput');
-    let firstName = document.getElementById('firstNameInput');
-    let lastName = document.getElementById('lastNameInput');
-    let userName = document.getElementById('userNameInput');
-    let password = document.getElementById('passwordInput');
-    let comfirmPassword = document.getElementById('confirmPasswordInput');
-    let role = document.getElementById('roleInput');
+    let errorDiv = document.getElementById("registerErrors");
+    let emailAddress = document.getElementById("emailAddressInput");
+    let firstName = document.getElementById("firstNameInput");
+    let lastName = document.getElementById("lastNameInput");
+    let userName = document.getElementById("userNameInput");
+    let password = document.getElementById("passwordInput");
+    let comfirmPassword = document.getElementById("confirmPasswordInput");
+    let role = document.getElementById("roleInput");
 
-
-    if (emailAddress.value.trim() === '') {
+    if (emailAddress.value.trim() === "") {
       errorDiv.hidden = false;
-      errorDiv.innerHTML = 'You must enter a value for emailAddress';
+      errorDiv.innerHTML = "You must enter a value for emailAddress";
       return false;
     }
 
-    if (firstName.value.trim() === '') {
+    if (firstName.value.trim() === "") {
       errorDiv.hidden = false;
-      errorDiv.innerHTML = 'Error: You must enter a value for firstName';
+      errorDiv.innerHTML = "Error: You must enter a value for firstName";
       return false;
     }
 
-    if (lastName.value.trim() === '') {
+    if (lastName.value.trim() === "") {
       errorDiv.hidden = false;
-      errorDiv.innerHTML = 'Error: You must enter a value for lastName';
+      errorDiv.innerHTML = "Error: You must enter a value for lastName";
       return false;
     }
 
-    if (userName.value.trim() === '') {
+    if (userName.value.trim() === "") {
       errorDiv.hidden = false;
-      errorDiv.innerHTML = 'You must enter a value for username';
+      errorDiv.innerHTML = "You must enter a value for username";
       return false;
     }
 
-    if (password.value.trim() === '') {
+    if (password.value.trim() === "") {
       errorDiv.hidden = false;
-      errorDiv.innerHTML = 'Error: You must enter a value for password';
+      errorDiv.innerHTML = "Error: You must enter a value for password";
       return false;
     }
 
-    if (comfirmPassword.value.trim() === '') {
+    if (comfirmPassword.value.trim() === "") {
       errorDiv.hidden = false;
-      errorDiv.innerHTML = 'Error: You must enter a value for comfirmPassword';
-      return false;
-    }    
-
-    if (role.value.trim() === '') {
-      errorDiv.hidden = false;
-      errorDiv.innerHTML = 'Error: You must enter a value for role';
+      errorDiv.innerHTML = "Error: You must enter a value for comfirmPassword";
       return false;
     }
 
-    if (role.value.trim() !== 'admin' && role.value.trim() !== 'user') {
+    if (role.value.trim() === "") {
       errorDiv.hidden = false;
-      errorDiv.innerHTML = 'Error: You must select a valid role';
+      errorDiv.innerHTML = "Error: You must enter a value for role";
       return false;
     }
 
-    if(password.value.trim() !== comfirmPassword.value.trim()){
+    if (role.value.trim() !== "admin" && role.value.trim() !== "user") {
       errorDiv.hidden = false;
-      errorDiv.innerHTML = 'Error: password and confirm password MUST match!';
+      errorDiv.innerHTML = "Error: You must select a valid role";
+      return false;
+    }
+
+    if (password.value.trim() !== comfirmPassword.value.trim()) {
+      errorDiv.hidden = false;
+      errorDiv.innerHTML = "Error: password and confirm password MUST match!";
       return false;
     }
 
     event.target.submit();
-
   });
-
 }
 
 if (donateButon) {
-  donateButon.addEventListener('submit', (event) => {
-    console.log('donate-button fired');
+  donateButon.addEventListener("submit", (event) => {
+    console.log("donate-button fired");
     event.preventDefault();
-    let charityName = document.getElementById('charityName').innerHTML;
+    let charityName = document.getElementById("charityName").innerHTML;
     donateButon.action = "/donate/charityName/" + charityName;
     event.target.submit();
   });
 }
 
 if (ageForm) {
-  ageForm.addEventListener('submit', (event) => {
+  ageForm.addEventListener("submit", (event) => {
     event.preventDefault();
 
-    let errorDiv = document.getElementById('ageErrors');
-    let age = document.getElementById('ageInput');
+    let errorDiv = document.getElementById("ageErrors");
+    let age = document.getElementById("ageInput");
 
     if (age.value <= 0) {
-      errorDiv.innerHTML = 'invalid age provided';
+      errorDiv.innerHTML = "invalid age provided";
       errorDiv.hidden = false;
       return false;
     }
 
-    if (typeof parseInt(age.value) !== 'number') {
-      errorDiv.innerHTML = 'must provide an age';
+    if (typeof parseInt(age.value) !== "number") {
+      errorDiv.innerHTML = "must provide an age";
       errorDiv.hidden = false;
       return false;
     }
@@ -141,28 +136,28 @@ if (ageForm) {
 }
 
 if (locationForm) {
-  locationForm.addEventListener('submit', (event) => {
+  locationForm.addEventListener("submit", (event) => {
     event.preventDefault();
 
-    let errorDiv = document.getElementById('locationErrors');
-    let location = document.getElementById('locationInput');
+    let errorDiv = document.getElementById("locationErrors");
+    let location = document.getElementById("locationInput");
 
-  
     if (!location.value) {
-      errorDiv.innerHTML = 'must provide a location';
+      errorDiv.innerHTML = "must provide a location";
       errorDiv.hidden = false;
       return false;
     }
-    
-    if (typeof location.value !== 'string') {
-      errorDiv.innerHTML = 'Error: location must be a string!';
+
+    if (typeof location.value !== "string") {
+      errorDiv.innerHTML = "Error: location must be a string!";
       errorDiv.hidden = false;
       return false;
     }
 
     location = location.value.trim();
     if (location.length === 0) {
-      errorDiv.innerHTML = 'Error: location cannot be an empty string or string with just spaces';
+      errorDiv.innerHTML =
+        "Error: location cannot be an empty string or string with just spaces";
       errorDiv.hidden = false;
       return false;
     }
@@ -218,9 +213,14 @@ if (donateForm) {
       errorDiv.innerHTML = `Error: ${userName.value} is not a valid value for user name as it only contains digits`;
       errorDiv.hidden = false;
       return false;
-    }
+  }
 
     event.target.submit();
   });
 }
 
+function showDonateButton(select, giftId) {
+  if (select.value === "-1") {
+    document.getElementById(`btnGiftDonate${giftId}`).style.display = "none";
+  } else {
+    document.getElementById(`btnGiftDonate${giftId}`).style.display = "";

@@ -18,8 +18,11 @@
 <script src="/public/js/main.js"></script>
 <link rel="stylesheet" href="/public/css/main.css">
 
-<form action="/donate" method="POST" id="donate-form">
-    <!-- Gift Type -->
+<form action="/donate" id="donate-form" method="POST">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <!-- Gift Type -->
     <label for="charityName">Charity Name (input 'All' to donate equally to all charities):</label>
     <input type="text" name="charityName" id="charityName" required>
 
@@ -27,20 +30,56 @@
     <select name="giftName" id="giftName">
         <option value="one-time-payment">One-time</option>
         <option value="monthly-payment">Monthly</option>
-    </select>
+                </select>
+            </div>
+        </div>
+    
+        <div class="row">
+            <div class="col-md-12">
+                <!-- Gift Amount -->
+                <label for="amount">Amount:</label>
+                <input type="number" name="amount" id="amount" required>
+            </div>
+        </div>
 
-    <!-- Gift Amount -->
-    <label for="amount">Amount:</label>
-    <input type="number" name="amount" id="amount" required>
+        <div class="row">
+            <div class="col-md-12">
+                <label for="userName">Username:</label>
+                <input type="text" name="userName" id="userName" required>
+            </div>
+        </div>
+    
+        <div class="row">
+            <div class="col-md-12">
+                <!-- Billing Information -->
+                <label for="billingName">Name:</label>
+                <input type="text" name="billingName" id="billingName" required>
+            </div>
+        </div>
+    
+        <div class="row">
+            <div class="col-md-12">
+                <label for="billingAddress">Address:</label>
+                <input type="text" name="billingAddress" id="billingAddress" required>
+            </div>
+        </div>
 
-    <label for="userName">Username:</label>
-    <input type="text" name="userName" id="userName" required>
-
-    <label for="giftNote">Gift Note (optional):</label>
-    <input type="text" name="giftNote" id="giftNote">
-
-    <button type="submit">Donate</button>
+        <div class="row">
+            <div class="col-md-12">
+                <label for="giftNote">Gift Note (optional):</label>
+                <input type="text" name="giftNote" id="giftNote">
+            </div>
+        </div>
+    
+        <div class="row">
+            <div class="col-md-4 submit-btn">
+                <button type="submit">Donate</button>
+            </div>
+        </div>
+    </div>
 </form>
 <div id="donateErrors" class="error" hidden></div>
+
+
 
 <footer><button onclick="history.back()">Go Back</button></footer>
