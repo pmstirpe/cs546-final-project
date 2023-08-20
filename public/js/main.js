@@ -5,6 +5,7 @@ let registrationForm = document.getElementById('registration-form');
 let donateButon = document.getElementById('donate-button');
 let ageForm = document.getElementById('age-search-form');
 let locationForm = document.getElementById('location-search-form');
+let donateForm = document.getElementById('donate-form');
 
 if (loginForm) {
   loginForm.addEventListener('submit', (event) => {
@@ -174,3 +175,52 @@ if (locationForm) {
     event.target.submit();
   });
 }
+
+if (donateForm) {
+  donateForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+
+    let errorDiv = document.getElementById('donateErrors');
+    let charityName = document.getElementById('charityName');
+    let userName = document.getElementById('userName');
+  
+    if (!charityName.value) {
+      errorDiv.innerHTML = 'must provide a charity name';
+      errorDiv.hidden = false;
+      return false;
+    }
+
+    charityName = charityName.value.trim();
+    if (charityName.length === 0) {
+      errorDiv.innerHTML = 'Error: charity name cannot be an empty string or string with just spaces';
+      errorDiv.hidden = false;
+      return false;
+    }
+    if (!isNaN(charityName.value)) {
+      errorDiv.innerHTML = `Error: ${chariyName.value} is not a valid value for charity name as it only contains digits`;
+      errorDiv.hidden = false;
+      return false;
+    }
+
+    if (!userName.value) {
+      errorDiv.innerHTML = 'must provide a user name';
+      errorDiv.hidden = false;
+      return false;
+    }
+
+    userName = userName.value.trim();
+    if (userName.length === 0) {
+      errorDiv.innerHTML = 'Error: user name cannot be an empty string or string with just spaces';
+      errorDiv.hidden = false;
+      return false;
+    }
+    if (!isNaN(userName.value)) {
+      errorDiv.innerHTML = `Error: ${userName.value} is not a valid value for user name as it only contains digits`;
+      errorDiv.hidden = false;
+      return false;
+    }
+
+    event.target.submit();
+  });
+}
+
