@@ -29,6 +29,22 @@
     <input type="submit" value="Donate"/>
 </form>
 
+<form id="report-button" action="/report" method="GET">
+    <button type="submit">Report</button>
+    <select name="charityId" id="charityId" hidden>
+        <option value={{charity._id}}></option> </select>
+    <select name="charityName" id="charityName" hidden>
+        <option value={{charity.charityName}}></option> </select>
+</form>
+
+<form id="review-button" action="/review" method="GET">
+    <button type="submit">Leave a Review</button>
+    <select name="charityId" id="charityId" hidden>
+        <option value={{charity._id}}></option> </select>
+    <select name="charityName" id="charityName" hidden>
+        <option value={{charity.charityName}}></option> </select>
+</form>
+
 <br>
 
 <footer><button onclick="history.back()">Go Back</button></footer>
