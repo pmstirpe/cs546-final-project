@@ -132,6 +132,49 @@ const getSponsorByLocation = async (location) => {
   return sponsorMatches;
 };
 
+const addReport = async (charityId, reportText) => {
+
+  if(!charityId || !reportText) throw 'ID and text are required.';
+
+  const charityCollection = await charities();
+
+  const updateResult = await charityCollection.updateOne({_id: new ObjectId(charityId)}, {$push: {reports: reportText}});
+  
+  if (updateResult.modifiedCount === 0) {
+      throw 'Failed to update the charity with report.';
+  }
+
+  const reportedCharity = await get(charityId);
+
+  if (reportedCharity.reports.length === 3) {
+    await remove(charityId)
+    return {message: "Charity has been reported 3 times and has been removed from the database"};
+  }
+
+  return {message: "Report added successfully."};
+
+};
+
+const addReview = async (charityId, reviewText) => {
+
+  if(!charityId || !reviewText) throw 'ID and text are required.';
+
+  const charityCollection = await charities();
+
+  const reviewedCharity = await get(charityId);
+
+  if (reviewedCharity.reviews.length)
+    throw `Cannot add review as there is a limit of 1 per charity`;
+
+  const updateResult = await charityCollection.updateOne({_id: new ObjectId(charityId)}, {$push: {reviews: reviewText}});
+  
+  if (updateResult.modifiedCount === 0) {
+      throw 'Failed to update the charity with review.';
+  }
+
+  return {message: "Review added successfully."};
+};
+
 
 const remove = async (id) => {
 
@@ -148,4 +191,4 @@ const remove = async (id) => {
     return `${deletionInfo.value.charityName} has been successfully deleted!`;
 };
 
-export default {createCharity, getAll, getAllSponsors, getSponsorByAge, getSponsorByLocation, get, getCharityByName, remove};
+export default {createCharity, getAll, getAllSponsors, getSponsorByAge, getSponsorByLocation, get, getCharityByName, addReport, addReview, remove};
