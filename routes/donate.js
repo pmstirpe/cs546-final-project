@@ -1,6 +1,7 @@
 import {Router} from 'express';
 import {donationData} from '../data/index.js';
 import {charityData} from '../data/index.js';
+import {giftData} from '../data/index.js';
 import {ObjectId} from 'mongodb';
 import * as helper from '../helpers.js';
 import validation from "../validation.js";
@@ -29,22 +30,38 @@ router.route('/').get(async (req, res) => {
     }
 
     try {
-        donation.userName = helper.checkString(donation.userName, 'user name');
-        donation.charityName = helper.checkString(donation.charityName, 'charity name');
-        donation.giftName = helper.checkString(donation.giftName, 'gift name');
-        donation.amount = helper.checkAmount(parseInt(donation.amount));
+        if (donation.charityName) {
+            donation.charityName = helper.checkString(donation.charityName, 'charity name');
+            if(donation.charityName.toLowerCase() !== 'all')
+                await charityData.getCharityByName(donation.charityName);
+            else 
+                donation.charityName = 'All';
+            
+            var charityName = donation.charityName;
+        }
+        if (donation.giftName) {
+            donation.giftName = helper.checkString(donation.giftName, 'gift name');
+            var giftName = donation.giftName;
+        }
 
-        if(donation.charityName.toLowerCase() !== 'all')
-            await charityData.getCharityByName(donation.charityName);
-        else 
-            donation.charityName = 'All';
+        if (donation.amount)
+            donation.amount = helper.checkAmount(parseInt(donation.amount));
         
         if (!donation.giftNote)
             donation.giftNote = 'N/A';
 
         donation.giftNote = helper.checkString(donation.giftNote, 'gift note');
 
-        await donationData.createDonation(donation.userName, donation.charityName, donation.giftName, donation.giftNote
+        if (donation.charityId) {
+            const charity = await charityData.get(donation.charityId);
+            var charityName = charity.charityName;
+        }
+        if (donation.giftId) {
+            const gift = await giftData.get(donation.giftId);
+            var giftName = gift.giftName;
+        }
+
+        await donationData.createDonation(req.session.user.userName, charityName, giftName, donation.giftNote
         );
 
         res.status(200).render('thankyou');
