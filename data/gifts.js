@@ -1,7 +1,7 @@
 import {gifts} from '../config/mongoCollections.js';
 import {ObjectId} from 'mongodb';
 import * as helper from "../helpers.js" 
-import * as validation from "../validation.js" 
+import validation from "../validation.js" 
 
 const createGift = async (
     giftName,
