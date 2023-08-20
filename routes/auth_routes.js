@@ -1,6 +1,6 @@
 //import express, express router as shown in lecture code
 import { Router } from "express";
-import { charityData,  userData,  donationData,  giftData,} from "../data/index.js";
+import { charityData,  userData,  donationData,  giftData, reviewData} from "../data/index.js";
 import * as helper from "../helpers.js";
 import { fileURLToPath } from "url";
 import path from "path";
@@ -181,6 +181,70 @@ router
     }
   });
 
+  router
+  .route('/report')
+  .get(async (req, res) => {
+    //code here for POST
+
+    try {
+      let charityId = req.query.charityId;
+      const charity = await charityData.get(charityId);
+
+      return res.render('report', {charityId: charityId, charityName: charity.charityName});
+      } catch (e) {
+      
+      res.status(500).json({error: e});
+    }
+  }).post(async (req, res) => {
+    //code here for POST
+
+    try {
+      let charityId = req.body.charityId;
+      let reportText = req.body.reportText;
+
+      const returnObj = await charityData.addReport(charityId, reportText);
+
+      return res.render('reportSubmission', {message: returnObj});
+      } catch (e) {
+      
+      res.status(500).json({error: e});
+    }
+  });
+
+  router
+  .route('/review')
+  .get(async (req, res) => {
+    //code here for POST
+
+    try {
+      let charityId = req.query.charityId;
+      const charity = await charityData.get(charityId);
+
+      return res.render('review', {charityId: charityId, charityName: charity.charityName});
+      } catch (e) {
+      
+      res.status(500).json({error: e});
+    }
+  }).post(async (req, res) => {
+    //code here for POST
+
+    try {
+      let charityId = req.body.charityId;
+      let reviewText = req.body.reviewText;
+      let rating = parseInt(req.body.reviewRating);
+
+      if (!req.session.user)
+        throw `must be logged in to create a review`;
+
+      const returnObj = await reviewData.createReview(charityId, req.session.user.userName, reviewText, rating);
+
+      return res.render('reviewSubmission', {message: returnObj});
+      } catch (e) {
+      
+      res.status(500).json({error: e});
+    }
+  });
+
 router.route("/giftCatalog").get(async (req, res) => {
   //code here for GET
   try {
@@ -191,6 +255,27 @@ router.route("/giftCatalog").get(async (req, res) => {
       currentTime: helper.getCurrentDateTime(),
       gifts: gifts,
       charities: charities,
+    });
+  } catch (e) {
+    res.status(400).json(e);
+  }
+});
+
+router.route("/giftDonation").get(async (req, res) => {
+  //code here for GET
+  try {
+    let charityId = req.query.charityId[0];
+    let giftId = req.query.giftId;
+
+    const charity = await charityData.get(charityId);
+    const gift = await giftData.get(giftId);
+
+   
+    res.render("giftDonation", {
+      charityId: charityId,
+      giftId: giftId,
+      charityName: charity.charityName,
+      giftName: gift.giftName
     });
   } catch (e) {
     res.status(400).json(e);
