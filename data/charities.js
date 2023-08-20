@@ -93,7 +93,7 @@ const getCharityByName = async (charityName) => {
       }
     }
 
-    if (charity === undefined) throw 'No charity with that name';
+    if (returnCharity === undefined) throw 'No charity with that name';
 
     return returnCharity;
 };
