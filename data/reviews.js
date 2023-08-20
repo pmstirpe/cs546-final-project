@@ -23,7 +23,7 @@ let newReview = {_id: new ObjectId(), charityId: charityId, userId: userId, revi
 const charityCollection = await charities();
 await charityCollection.updateOne({_id: new ObjectId(charityId)}, {$push: {reviews: newReview}});
 
-return newReview;
+return {message: "Review added successfully."};
 }
 
 const getAllReviews = async (charityId) => {
