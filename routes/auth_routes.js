@@ -5,6 +5,7 @@ import * as helper from '../helpers.js';
 import {fileURLToPath} from 'url';
 import path from 'path';
 import { dirname } from "path";
+import validation from "../validation.js";
 
 
 const router = Router();
@@ -175,6 +176,27 @@ router.route('/giftCatalog').get(async (req, res) => {
   }
 });
 
+router
+  .route('/comment')
+  .post(async (req, res) => {
+    //code here for POST
+
+    try {
+      let comment = req.body.comment;
+      let donationId = req.body.donationId;
+
+      comment = helper.checkString(comment, 'comment');
+      donationId = validation.checkId(donationId, 'charity id');
+
+      await donationData.addComment(donationId, comment);
+
+      return res.redirect('/donate');
+      } catch (e) {
+      
+      res.status(500).json({error: e});
+    }
+  });
+
 router.route('/profile').get(async (req, res) => {
   //code here for GET
   try {
@@ -184,7 +206,6 @@ router.route('/profile').get(async (req, res) => {
     //Get all donations per user
     let charities = await charityData.getAll();
     let donations = await donationData.getByUsername(user);
-    //let donations = await donationData.getByEmailAddress(req.session.user.emailAddress);
     let reviews = [];
     let charityNamesForReviews = [];
 
@@ -240,13 +261,13 @@ router.route("/aboutus").get(async (req, res) => {
   return res.render("aboutus");
 });
 
-// Display the Charities page 
+// Display the Charities page
 /*router.route("/charity").get(async (req, res) => {
   return res.render("charities");
-});
+});*/
 
 // Display the Gift Catalog page
-router.route("/gifts").get(async (req, res) => {
+/*router.route("/gifts").get(async (req, res) => {
   return res.render("giftCatalog");
 });
 
@@ -258,7 +279,7 @@ router.route("/individualsponsorship").get(async (req, res) => {
 // Display the Donate page
 router.route("/donate").get(async (req, res) => {
   return res.render("donate");
-});*/
+});
 
-//export router
+//export router*/
 export default router;
