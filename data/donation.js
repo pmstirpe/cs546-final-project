@@ -79,7 +79,7 @@ const getByUsername = async (userName) => {
     }
 
 
-     if (!donation) throw 'No donation found with that username';
+    // if (!donation) throw 'No donation found with that username';
     return returnArr;
   };
 
