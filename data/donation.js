@@ -9,15 +9,13 @@ import validation from "../validation.js";
     userName,
     charityName,
     giftName,
-    giftNote,
-    comments
+    giftNote
 )=>{
 
     userName = helper.checkString(userName, 'userName');
     charityName = helper.checkString(charityName, 'charityName');
     giftName = helper.checkString(giftName, 'giftName');
     giftNote = helper.checkString(giftNote, 'giftNote');
-    comments = validation.checkString(comments, 'comments');
 
       // emailAddress = emailAddress.toLowerCase();
       // const emailRegEx = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
@@ -33,7 +31,7 @@ import validation from "../validation.js";
         charityName: charityName,
         giftName: giftName,
         giftNote: giftNote,
-        comments: comments,
+        comments: 'No comment yet',
         donateDate:donateDate
       } 
 
@@ -45,8 +43,6 @@ import validation from "../validation.js";
     } else {
           return newDonation;
     }
-
-
 };
 
   
@@ -83,38 +79,39 @@ const getByUsername = async (userName) => {
     }
 
 
+     if (!donation) throw 'No donation found with that username';
     return returnArr;
   };
 
 
- const getByEmailAddress = async (emailAddress) => {
+//  const getByEmailAddress = async (emailAddress) => {
 
-    if(!emailAddress) throw 'emailAddress is required.';
+//     if(!emailAddress) throw 'emailAddress is required.';
 
-    emailAddress = validation.checkString(emailAddress, 'Donator emailAddress')
+//     emailAddress = validation.checkString(emailAddress, 'Donator emailAddress')
 
-    emailAddress = emailAddress.toLowerCase();
-    const emailRegEx = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
-    if (!emailAddress || typeof emailAddress !== 'string' || !emailAddress.match(emailRegEx)) {
-       throw 'Error: Invalid email address';
-    }
+//     emailAddress = emailAddress.toLowerCase();
+//     const emailRegEx = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+//     if (!emailAddress || typeof emailAddress !== 'string' || !emailAddress.match(emailRegEx)) {
+//        throw 'Error: Invalid email address';
+//     }
 
-    const donationCollection = await donations();
-    // const donation = await donationCollection.findOne({userName: userName});
-    const donationList = await donationCollection.find({}).toArray();
+//     const donationCollection = await donations();
+//     const donation = await donationCollection.findOne({userName: userName});
+//     const donationList = await donationCollection.find({}).toArray();
 
-    let returnArr = [];
+//     let returnArr = [];
 
-    for(let i = 0; i < donationList.length; i++){
-        if(donationList[i].emailAddress === emailAddress){
-            returnArr.push(donationList[i]);
-        }
-    }
+//     for(let i = 0; i < donationList.length; i++){
+//         if(donationList[i].userName === userName){
+//             returnArr.push(donationList[i]);
+//         }
+//     }
 
 
-    //  if (!donation) throw 'No donation found with that email address';
-    return returnArr;
-  };
+//      if (!donation) throw 'No donation found with that email address';
+//     return returnArr;
+//   };
 
 
    const getByCharityname = async (charityName) => {
@@ -285,15 +282,15 @@ const calculateAmountByUsername = async (userName) => {
     const donationCollection = await donations();
     
     const existingDonationWithComment = await donationCollection.findOne({
-        charityName: charityName,
-        comment: { $exists: true }
+        charityName: charityName.toLowerCase(),
+        comments: { $exists: true }
     });
 
     if (existingDonationWithComment) {
         throw 'A comment for this charity already exists. Only one comment is allowed per charity.';
     }
 
-    const updateResult = await donationCollection.updateOne({charityName:charityName}, {$set: {comment: comment}});
+    const updateResult = await donationCollection.updateOne({charityName:charityName.toLowerCase()}, {$set: {comments: comment}});
     
     if (updateResult.modifiedCount === 0) {
         throw 'Failed to update the donation with comment.';
@@ -309,7 +306,19 @@ const addComment = async (donationId, comment) => {
     if(!donationId || !comment) throw 'Donation ID and comment are required.';
 
     const donationCollection = await donations();
-    const updateResult = await donationCollection.updateOne({_id: new ObjectId(donationId)}, {$set: {comment: comment}});
+
+
+    const existingDonationWithComment = await donationCollection.findOne({
+        _id: new ObjectId(donationId),
+        comments: 'No comment yet'
+    });
+
+    if (!existingDonationWithComment) {
+        throw 'A comment for this charity already exists. Only one comment is allowed per charity.';
+    }
+
+
+    const updateResult = await donationCollection.updateOne({_id: new ObjectId(donationId)}, {$set: {comments: comment}});
     
     if (updateResult.modifiedCount === 0) {
         throw 'Failed to update the donation with comment.';
@@ -341,4 +350,4 @@ const addComment = async (donationId, comment) => {
 
 };
 
-export default {createDonation, getById, getByUsername, getByCharityname, getByGiftname, getByEmailAddress, getAllDonations, getByDonatedate, calculateAmountByDonationId, calculateAmountByUsername, addCommentByCharityname, addComment, divideDonation};
+export default {createDonation, getById, getByUsername, getByCharityname, getByGiftname, getAllDonations, getByDonatedate, calculateAmountByDonationId, calculateAmountByUsername, addCommentByCharityname, addComment, divideDonation};
