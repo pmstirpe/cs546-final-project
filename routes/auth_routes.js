@@ -7,6 +7,7 @@ import path from "path";
 import { dirname } from "path";
 import validation from "../validation.js";
 import charities from "../data/charities.js";
+import xss from "xss";
 
 const router = Router();
 const __filename = fileURLToPath(import.meta.url);
@@ -104,8 +105,8 @@ router
     I will just do that here */
     // get password
     try {
-      let emailAddress = req.body.emailAddressInput;
-      let password = req.body.passwordInput;
+      let emailAddress = xss(req.body.emailAddressInput);
+      let password = xss(req.body.passwordInput);
 
       let userCheck = await userData.checkUser(emailAddress, password);
       req.session.user = {
