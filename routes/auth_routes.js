@@ -87,9 +87,9 @@ router
   .get(async (req, res) => {
     //code here for GET'
     try {
-      res.render("login");
+      return res.render("login");
     } catch (e) {
-      res.status(500).json({ error: e });
+      return res.status(500).json({ error: e });
     }
   })
   .post(async (req, res) => {
@@ -116,19 +116,24 @@ router
         role: userCheck.role,
         userId: userCheck._id
       };
-      if (userCheck.role === "admin") {
+
+      if (userCheck)
+        res.json({success: true, user: userCheck.firstName, role: userCheck.role});
+      else
+        res.json({success: false, error: 'Could not validate user'});
+     /* if (userCheck.role === "admin") {
         //res.render('admin', {userName: userCheck.firstName, currentTime: helper.getCurrentDateTime()});
-        res.redirect("admin");
+        return res.redirect("admin");
       } else {
         //res.render('protected', {isAdmin: userCheck.role === 'admin', firstName: userCheck.firstName, currentTime: helper.getCurrentDateTime(), role: userCheck.role});
-        res.redirect("protected");
-      }
+        return res.redirect("protected");
+      }*/
     } catch (e) {
       // If the user does not provide a valid login, you will render the login screen once again, and this
       //time show an error message (along with an HTTP 400 status code) to the user explaining that they
       //did not provide a valid username and/or password.
       //res.render('login');
-      res.status(400).render("login", { loginError: true, error: e });
+      res.json({success: false, error: e});
     }
   });
 
@@ -151,12 +156,12 @@ router.route("/admin").get(async (req, res) => {
   //code here for GET
   try {
     let user = req.session.user;
-    res.render("admin", {
+    return res.render("admin", {
       userName: user.firstName,
       currentTime: helper.getCurrentDateTime(),
     });
   } catch (e) {
-    res.status(400).json(e);
+    return res.status(400).json(e);
   }
 });
 
