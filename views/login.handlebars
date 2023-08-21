@@ -4,7 +4,8 @@ login form handlebar template
 
 --}}
 
-<form method="POST" action="/login" id="login-form">
+<!--method="POST" action="/login"-->
+<form id="login-form">
     <div class="container">
         <div class="form-group">
             <label for="emailAddressInput">Email Address:</label>
@@ -20,6 +21,7 @@ login form handlebar template
     </div>
     {{!-- <div id="loginError" class="error" hidden>Error: Please enter a valid username and password</div> --}}
 </form>
+<p id="loginResponse"  hidden></p>
 
 <div id="loginErrors" class="error" hidden></div>
 
@@ -30,3 +32,4 @@ login form handlebar template
 <a href="/register">Click here to register!</a>
 
 <script src="/public/js/main.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
