@@ -28,7 +28,27 @@ if (loginForm) {
       return false;
     }
 
-    event.target.submit();
+    axios({
+      method: 'POST',
+      url: 'http://localhost:3000/login',
+      contentType: 'application/json',
+      data: {
+          emailAddressInput: emailAddress.value.trim(),
+          passwordInput: password.value.trim()
+      }
+    }).then(function (responseMessage) {
+      if (responseMessage.data.success) {
+        let pTag = document.getElementById('loginResponse');
+        pTag.innerText = `Welcome ${responseMessage.data.user}, you have successfully logged in. Your role in the system is ${responseMessage.data.role}`;
+        pTag.hidden = false;
+      }
+      else {
+        let pTag = document.getElementById('loginResponse');
+        pTag.innerText = `Unsuccessful login. ${responseMessage.data.error}. Please try again.`;
+        pTag.hidden = false;
+      }
+      
+      });
   });
 }
 
