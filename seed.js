@@ -28,11 +28,13 @@ console.log("-------------------COMPLETE-------------------------------");
   
 let charity1 = await charityData.createCharity('Make a Wish', 'Children', '04/05/1998', true, 'america', 5, 'N/A', 'Together, we create life-changing wishes for children with critical illnesses – but you can make a childs wish possible.');
 let charity2 = await charityData.createCharity('Salvation Army', 'Religion', '02/11/1996', true, 'europe', 7, 'N/A', 'The Salvation Army, an international movement, is an evangelical part of the universal Christian Church. Its message is based on the Bible. Its ministry is motivated by the love of God. Its mission is to preach the gospel of Jesus Christ and to meet human needs in His name without discrimination.');
-let charity3 = await charityData.createCharity('Jane Doe', 'Children', '02/11/2019', true, 'africa', 4, '/public/jane.jpg', 'jane doe individual sponsor');
-let charity4 = await charityData.createCharity('John Doe', 'Children', '02/11/2016', true, 'europe', 7, '/public/john.png', 'john doe individual sponsor');
-let charity5 = await charityData.createCharity('Amy Lee', 'Children', '02/11/2017', true, 'america', 6, '/public/amy.jpeg', 'amy lee individual sponsor');
-let charity6 = await charityData.createCharity('Amy Lee', 'Children', '02/11/2017', false, 'america', 6, '/public/amy.jpeg', 'amy lee individual sponsor');
-let charity7 = await charityData.createCharity('Amy Lee', 'Children', '02/11/2017', false, 'america', 6, '/public/amy.jpeg', 'amy lee individual sponsor');
+let charity3 = await charityData.createCharity('Walk Across America', 'Cancer', '02/11/2019', true, 'america', 4, 'N/A', 'Walk Across America. 8181 likes. I walked across America for veteran suicide awareness and now I have my nonprofit to benefit Veterans.');
+let charity4 = await charityData.createCharity('John Doe', 'Children', '02/11/2016', false, 'europe', 7, '/public/john.png', 'Donate to Johns cause to keep a smile on his face!');
+let charity5 = await charityData.createCharity('Jane Doe', 'Children', '02/11/2017', false, 'america', 6, '/public/amy.jpeg', 'Please help Jane on her journey to recovery!');
+let charity6 = await charityData.createCharity('The Nature Conservancy', 'Nature', '02/11/2012', true, 'europe', 11, 'N/A', 'When you make a tax-deductible donation to The Nature Conservancy, youre supporting the most effective solutions to the biggest threats facing our lands, waters and wildlife. As a leading global environmental nonprofit, The Nature Conservancy is working to advance conservation in all 50 states and U.S. territories and in 70 countries around the world. Thats why your contribution is so much more than charity; its an investment in the future of our planet.');
+let charity7 = await charityData.createCharity('Feeding America', 'Food', '02/11/2009', true, 'america', 13, 'N/A', 'Feeding America is a United States–based nonprofit organization that is a nationwide network of more than 200 food banks that feed more than 46 million people through food pantries, soup kitchens, shelters, and other community-based agencies. Forbes ranks it as the largest U.S. charity by revenue');
+let charity8 = await charityData.createCharity('Childrens Education Foundation', 'Books', '02/11/2009', true, 'america', 13, 'N/A', 'We strongly support and promote The Virtues Education for all schools and orphanages in the world. It is a global grassroots initiative with the aim to inspire the practice of virtues in all aspects of life.');
+let charity9 = await charityData.createCharity('Animal Rescue League', 'Pet Foods', '02/11/2007', true, 'america', 16, 'N/A', 'We strongly support and promote The Virtues Education for all schools and orphanages in the world. It is a global grassroots initiative with the aim to inspire the practice of virtues in all aspects of life.');
 console.log("-------------------COMPLETE-------------------------------");
 
 
@@ -92,11 +94,6 @@ await donationData.createDonation('hasking', 'Make a Wish', 'Blankets', 'Hope ev
 await donationData.createDonation('Peetey', 'Childrens Education Foundation', 'Books', 'A little help can light up a childs future. Enjoy these educational tools!', 'Looking forward to seeing these supplies make a difference!');
 await donationData.createDonation('hfernehough6', 'Save the Oceans', 'Reusable Water Bottles', 'Reduce single-use plastic with these bottles!', 'Every little bit counts for our planet');
 await donationData.createDonation('tpardewe', 'Animal Rescue League', 'Pet Foods', 'For our furry friends in need.', 'Remember to adopt, not shop!');
-await donationData.createDonation('Peetey', 'Help for the Homeless', 'Tents', 'A little shelter during tough times.', 'Hope this provides some relief');
-await donationData.createDonation('mbewshire0', 'Plant a Tree Foundation', 'Saplings', 'Lets make the world greener, one tree at a time!', 'Greener future ahead!');
-await donationData.createDonation('polligan2', 'Musicians Without Borders', 'Guitars', 'Music heals all wounds. Enjoy!', 'Looking forward to some great music');
-await donationData.createDonation('nmanes3', 'Local Food Bank', 'Non-perishable Foods', 'Helping out families in need.', 'Stay strong and keep going');
-await donationData.createDonation('Peetey', 'Habitat for Humanity', 'Bricks', 'Building homes and futures.', 'Everyone deserves a roof over their head');
 //await donationData.createDonation('Peetey', 'Habitat for Humanity', 'Bricks', 'Building homes and futures.', 'Everyone deserves a roof over their head');
 
 console.log("-------------------COMPLETE-------------------------------");
